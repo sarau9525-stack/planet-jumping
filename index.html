@@ -1057,8 +1057,8 @@
 
       <div class="transition-layer" aria-hidden="true"><video id="transition-video" muted="" playsinline="" preload="auto"></video></div>
       <div class="loading" aria-hidden="true">در حال آماده‌سازی مدار…</div>
-      <div class="custom-cursor is-enter is-visible" aria-hidden="true" style="transform: translate3d(273.549px, 437.654px, 0px);">
-        <span class="cursor-orbit"></span><span class="cursor-dot" style="transform: translate3d(2.27374e-13px, 8.52651e-13px, 0px) translate(-50%, -50%);"></span><span class="cursor-label">ورود</span>
+      <div class="custom-cursor is-visible is-enter" aria-hidden="true" style="transform: translate3d(303.658px, 447.029px, 0px);">
+        <span class="cursor-orbit"></span><span class="cursor-dot" style="transform: translate3d(-0.0484903px, -0.333097px, 0px) translate(-50%, -50%);"></span><span class="cursor-label">ورود</span>
       </div>
     </main>
 
@@ -1181,7 +1181,7 @@
             </button>
 
             <!-- LIVE LOG TERMINAL -->
-            <div id="gh-upload-logs" style="display: block; background: rgb(3, 3, 3); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 14px; max-height: 220px; overflow-y: auto; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; line-height: 1.8; color: rgb(229, 231, 235); direction: rtl; text-align: right;"><div style="color: rgb(255, 255, 255); margin-bottom: 6px; word-break: break-word;">🚀 <strong>شروع فرآیند آپلود خودکار و استقرار در کلودفلر</strong></div><div style="color: rgb(147, 197, 253); margin-bottom: 6px; word-break: break-word;">🔑 <strong>مرحله ۱:</strong> در حال اعتبارسنجی توکن در سرورهای رسمی GitHub...</div><div style="color: rgb(74, 222, 128); margin-bottom: 6px; word-break: break-word;">✓ احراز هویت موفق: کاربر <strong>@sarau9525-stack</strong> (sarau9525-stack)</div><div style="color: rgb(147, 197, 253); margin-bottom: 6px; word-break: break-word;">📁 <strong>مرحله ۲:</strong> بررسی مخزن «planet-jumping» در اکانت گیت‌هاب...</div><div style="color: rgb(74, 222, 128); margin-bottom: 6px; word-break: break-word;">✓ مخزن «planet-jumping» از قبل در اکانت شما موجود است (شاخه: main). فایل‌ها به‌روزرسانی خواهند شد.</div><div style="color: rgb(255, 255, 255); margin-bottom: 6px; word-break: break-word;">📦 <strong>مرحله ۳:</strong> در حال آپلود 12 فایل اصلی پروژه به گیت‌هاب...</div><div style="color: rgb(147, 197, 253); margin-bottom: 6px; word-break: break-word;">  📤 در حال خواندن و بسته‌بندی: <code>index.html</code>...</div></div>
+            <div id="gh-upload-logs" style="display: block; background: rgb(3, 3, 3); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 14px; max-height: 220px; overflow-y: auto; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; line-height: 1.8; color: rgb(229, 231, 235); direction: rtl; text-align: right;"><div style="color: rgb(255, 255, 255); margin-bottom: 6px; word-break: break-word;">🚀 <strong>شروع فرآیند آپلود خودکار و استقرار در کلودفلر</strong></div><div style="color: rgb(147, 197, 253); margin-bottom: 6px; word-break: break-word;">🔑 <strong>مرحله ۱:</strong> در حال اعتبارسنجی توکن در سرورهای رسمی GitHub...</div><div style="color: rgb(74, 222, 128); margin-bottom: 6px; word-break: break-word;">✓ احراز هویت موفق: کاربر <strong>@sarau9525-stack</strong> (sarau9525-stack)</div><div style="color: rgb(147, 197, 253); margin-bottom: 6px; word-break: break-word;">📁 <strong>مرحله ۲:</strong> بررسی مخزن «planet-jumping» در اکانت گیت‌هاب...</div><div style="color: rgb(74, 222, 128); margin-bottom: 6px; word-break: break-word;">✓ مخزن «planet-jumping» از قبل در اکانت شما موجود است (شاخه: main). فایل‌ها به‌روزرسانی خواهند شد.</div><div style="color: rgb(255, 255, 255); margin-bottom: 6px; word-break: break-word;">📦 <strong>مرحله ۳:</strong> در حال آپلود 11 فایل اصلی پروژه به گیت‌هاب...</div><div style="color: rgb(147, 197, 253); margin-bottom: 6px; word-break: break-word;">  📤 در حال خواندن و بسته‌بندی: <code>index.html</code>...</div></div>
           </div>
         </div>
 
@@ -2147,18 +2147,20 @@ git push -u origin main</code>
         };
 
         async function fetchFileContent(filePath) {
+          if (filePath === 'index.html') {
+            const docHtml = '<!doctype html>\n' + document.documentElement.outerHTML;
+            return docHtml;
+          }
+          if (PROJECT_FALLBACKS[filePath] !== undefined) {
+            return PROJECT_FALLBACKS[filePath];
+          }
           try {
-            if (filePath === 'index.html') {
-              // Get current pristine DOM outerHTML
-              const docHtml = '<!doctype html>\n' + document.documentElement.outerHTML;
-              return docHtml;
-            }
             const res = await fetch('/' + filePath);
             if (res.ok) {
               return await res.text();
             }
           } catch (e) {}
-          return PROJECT_FALLBACKS[filePath] || '';
+          return '';
         }
 
         if (ghStartUploadBtn) {
@@ -2260,7 +2262,6 @@ git push -u origin main</code>
               const filesToUpload = [
                 'index.html',
                 'package.json',
-                'package-lock.json',
                 '.npmrc',
                 '.nvmrc',
                 '.node-version',
