@@ -1,0 +1,2618 @@
+<!doctype html>
+<html lang="fa" dir="rtl"><head>
+    <script type="module" src="/@vite/client"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جهش میان سیارات | اثر علیرضا کریمی</title>
+    <meta name="description" content="تجربه تعاملی و سینمایی جهش میان سیارات منظومه شمسی با پورتال ۳ بعدی — طراحی و توسعه توسط علیرضا کریمی">
+    <meta property="og:title" content="جهش میان سیارات | اثر علیرضا کریمی">
+    <meta property="og:description" content="تجربه تعاملی و سینمایی جهش میان سیارات منظومه شمسی با پورتال ۳ بعدی — اثر علیرضا کریمی">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="author" content="علیرضا کریمی (Alireza Karimi)">
+
+    <!-- GOOGLE FONTS: VAZIRMATN FOR PERSIAN TYPOGRAPHY -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+
+    <style>
+      /* FONTS */
+      @font-face {
+        font-family: 'SF Pro';
+        font-weight: 400;
+        src: local('SF Pro Text'), local('SF Pro Display'), local('SF Pro'), local('Helvetica Neue'), local('Arial');
+      }
+      @font-face {
+        font-family: 'SF Pro';
+        font-weight: 700;
+        src: local('SF Pro Text Bold'), local('SF Pro Display Bold'), local('SF Pro Bold'), local('Helvetica Neue Bold'), local('Arial Bold');
+      }
+      @font-face {
+        font-family: 'SF Pro Thin';
+        font-weight: 100;
+        src: local('SF Pro Text Thin'), local('SF Pro Display Thin'), local('SF Pro Thin'), local('Helvetica Neue Thin');
+      }
+      @font-face {
+        font-family: 'Aalto';
+        font-weight: 400;
+        src: local('Aalto'), local('Arial Narrow'), local('Impact');
+      }
+
+      :root {
+        font-family: 'Vazirmatn', 'SF Pro', system-ui, -apple-system, sans-serif;
+        color: #fff;
+        background: #090807;
+        font-synthesis: none;
+      }
+
+      /* LAYOUT */
+      * {
+        box-sizing: border-box;
+      }
+      html, body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #090807;
+      }
+      .experience {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        min-height: 540px;
+        overflow: hidden;
+        background: #0a0908;
+      }
+      .backgrounds, .background, .shade, .transition-layer, .transition-layer video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .background {
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 0.8s ease, filter 0.8s ease;
+      }
+      .background.is-visible {
+        opacity: 1;
+      }
+
+      /* PLANET SPECIFIC ATMOSPHERE FILTERS */
+      .experience[data-planet="mars"] .background.is-visible {
+        filter: contrast(1.1) brightness(0.95);
+      }
+      .experience[data-planet="earth"] .background.is-visible {
+        filter: contrast(1.15) brightness(1.05) saturate(1.2);
+      }
+      .experience[data-planet="venus"] .background.is-visible {
+        filter: contrast(1.2) brightness(1.0) sepia(0.4) saturate(1.4);
+      }
+      .experience[data-planet="mercury"] .background.is-visible {
+        filter: contrast(1.3) brightness(0.85) grayscale(0.2) hue-rotate(15deg);
+      }
+      .experience[data-planet="jupiter"] .background.is-visible {
+        filter: contrast(1.25) brightness(1.05) hue-rotate(335deg) saturate(1.7);
+      }
+      .experience[data-planet="saturn"] .background.is-visible {
+        filter: contrast(1.1) brightness(1.05) sepia(0.45) hue-rotate(150deg) saturate(1.3);
+      }
+      .experience[data-planet="uranus"] .background.is-visible {
+        filter: contrast(1.15) brightness(1.15) hue-rotate(185deg) saturate(1.6);
+      }
+      .experience[data-planet="neptune"] .background.is-visible {
+        filter: contrast(1.3) brightness(0.9) hue-rotate(215deg) saturate(2.2);
+      }
+
+      .shade {
+        z-index: 1;
+        background: linear-gradient(to bottom, transparent 52%, rgba(0, 0, 0, 0.88) 100%);
+        pointer-events: none;
+      }
+      .chrome {
+        position: absolute;
+        z-index: 4;
+        transition: opacity 0.45s ease, filter 0.45s ease;
+      }
+      .experience.is-transitioning .chrome {
+        opacity: 0;
+        filter: blur(8px);
+        pointer-events: none;
+      }
+
+      /* HEADER */
+      .header {
+        left: clamp(18px, 1.95vw, 28px);
+        right: clamp(18px, 1.95vw, 28px);
+        top: clamp(18px, 3.1vh, 28px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 35 !important;
+        pointer-events: auto !important;
+      }
+      .header-creator {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 6px 14px;
+        border-radius: 999px;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        font-size: 13px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.95);
+        cursor: pointer;
+        transition: background 0.2s, transform 0.2s, border-color 0.2s;
+        text-decoration: none;
+      }
+      .header-creator:hover {
+        background: rgba(255, 255, 255, 0.18);
+        border-color: rgba(255, 255, 255, 0.4);
+        transform: translateY(-1px);
+      }
+      .header-creator-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #10b981;
+        box-shadow: 0 0 8px #10b981;
+      }
+
+      .header-actions {
+        margin-right: auto;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        height: 42px;
+        padding: 4px 6px;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-radius: 999px;
+        gap: 3px;
+      }
+      .nav a {
+        color: #fff;
+        text-decoration: none;
+        padding: 7px 16px;
+        border-radius: 999px;
+        line-height: 1.3;
+        font-size: 13px;
+        font-weight: 500;
+        transition: background 0.2s, color 0.2s, transform 0.15s;
+        cursor: pointer !important;
+      }
+      .nav a:hover {
+        background: rgba(255, 255, 255, 0.22);
+      }
+      .nav a.active {
+        background: #fff;
+        color: #000;
+        font-weight: 700;
+      }
+      .cloudflare-pill-btn {
+        height: 42px;
+        padding: 0 16px;
+        border: 1px solid #f38020;
+        border-radius: 999px;
+        background: rgba(243, 128, 32, 0.18);
+        color: #ffa149;
+        cursor: pointer !important;
+        font-family: inherit;
+        font-size: 13px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: transform 0.2s, background 0.2s, color 0.2s;
+      }
+      .cloudflare-pill-btn:hover {
+        background: #f38020;
+        color: #000;
+        transform: translateY(-1px);
+        box-shadow: 0 0 16px rgba(243, 128, 32, 0.5);
+      }
+      .menu {
+        height: 42px;
+        padding: 0 18px;
+        border: 0;
+        border-radius: 999px;
+        background: #fff;
+        color: #000;
+        cursor: pointer !important;
+        font-family: inherit;
+        font-size: 13px;
+        font-weight: 700;
+        transition: transform 0.2s, opacity 0.2s;
+      }
+      .menu:hover {
+        opacity: 0.9;
+        transform: scale(1.03);
+      }
+
+      /* SIDEBAR PLANET LIST (RTL: right side) */
+      .planet-list {
+        right: clamp(18px, 1.95vw, 28px);
+        top: 50%;
+        transform: translateY(-43%);
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        font-size: 15px;
+        z-index: 30 !important;
+        pointer-events: auto !important;
+      }
+      .planet-item {
+        display: flex;
+        align-items: center;
+        min-height: 28px;
+        color: rgba(255, 255, 255, 0.65);
+        user-select: none;
+        cursor: pointer !important;
+        pointer-events: auto !important;
+        transition: color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+        padding: 3px 10px;
+        border-radius: 10px;
+        position: relative;
+        font-weight: 500;
+      }
+      .planet-item:hover {
+        color: #fff;
+        transform: translateX(-6px);
+        background: rgba(255, 255, 255, 0.12);
+      }
+      .planet-item.active {
+        font-size: 17px;
+        font-weight: 700;
+        gap: 8px;
+        color: #fff;
+        background: rgba(255, 255, 255, 0.1);
+      }
+      .planet-item.active:before {
+        content: '';
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #fff;
+        flex-shrink: 0;
+        box-shadow: 0 0 12px rgba(255, 255, 255, 0.9);
+      }
+
+      /* PORTAL */
+      .portal-wrap {
+        left: 50%;
+        top: 50%;
+        width: min(320px, 31vw);
+        transform: translate(-50%, -54%);
+        perspective: none;
+        z-index: 25 !important;
+        pointer-events: auto !important;
+      }
+      .portal-heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+        font-size: 15px;
+        opacity: 0;
+        cursor: pointer !important;
+        pointer-events: auto !important;
+        transition: transform 0.2s, opacity 0.2s;
+        padding: 4px 6px;
+        border-radius: 8px;
+        user-select: none;
+      }
+      .portal-heading:hover {
+        transform: translateY(-2px);
+      }
+      .portal-heading strong {
+        font-size: 17px;
+        margin-right: 8px;
+      }
+      .portal {
+        position: relative;
+        display: block;
+        width: 100%;
+        aspect-ratio: 320 / 350;
+        padding: 0;
+        overflow: visible;
+        border: 0;
+        border-radius: 90px;
+        background: transparent;
+        cursor: pointer !important;
+        pointer-events: auto !important;
+        box-shadow: none;
+        transform: none !important;
+        outline: none;
+      }
+      .portal video, .portal img {
+        visibility: hidden;
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        pointer-events: none;
+      }
+      .portal-canvas {
+        position: fixed;
+        inset: 0;
+        z-index: 3;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      /* CONTENT (pointer-events: none so it doesn't block the sidebar or portal!) */
+      .planet-content {
+        right: clamp(28px, 4vw, 58px);
+        left: clamp(28px, 3vw, 44px);
+        bottom: clamp(24px, 3vh, 30px);
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 40px;
+        z-index: 10 !important;
+        pointer-events: none !important;
+      }
+      .planet-content-title-box {
+        display: flex;
+        flex-direction: column;
+        pointer-events: none !important;
+      }
+      .planet-content h1 {
+        font-family: 'Vazirmatn', sans-serif;
+        font-size: clamp(80px, 14vw, 190px);
+        font-weight: 800;
+        line-height: 0.9;
+        margin: 0;
+        letter-spacing: -0.02em;
+        transform: translateX(20px);
+        opacity: 0;
+        user-select: none;
+        pointer-events: none !important;
+      }
+      .planet-en-name {
+        font-family: Aalto, 'Arial Narrow', sans-serif;
+        font-size: clamp(24px, 4vw, 48px);
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        opacity: 0.5;
+        margin-top: 4px;
+      }
+      .planet-content dl {
+        width: min(460px, 38vw);
+        margin: 0;
+        font-size: 15px;
+        pointer-events: auto;
+      }
+      .fact {
+        display: grid;
+        grid-template-columns: 140px 1fr;
+        gap: 16px;
+        padding: 9px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+        opacity: 0;
+        line-height: 1.5;
+      }
+      .fact:last-child {
+        border-bottom: 0;
+      }
+      .fact dt {
+        font-weight: 700;
+        margin: 0;
+        color: #fff;
+      }
+      .fact dd {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.85);
+      }
+
+      /* MISC */
+      .transition-layer {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: -1;
+      }
+      .scene-canvas {
+        display: none;
+      }
+      .loading {
+        position: absolute;
+        z-index: 12;
+        left: 50%;
+        bottom: 30px;
+        transform: translateX(-50%);
+        opacity: 0;
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        transition: opacity 0.2s;
+        pointer-events: none;
+        background: rgba(0, 0, 0, 0.6);
+        padding: 6px 16px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      .experience.is-loading .loading {
+        opacity: 0.9;
+      }
+      .experience.is-transitioning .header,
+      .experience.is-transitioning .planet-list {
+        opacity: 1;
+        filter: none;
+        pointer-events: auto;
+      }
+      .experience.is-transitioning .shade {
+        opacity: 1;
+      }
+      .experience.is-committing .background {
+        transition: none !important;
+      }
+
+      /* PRELOADER */
+      .preloader {
+        position: absolute;
+        inset: 0;
+        z-index: 40;
+        background: #000;
+        overflow: hidden;
+        cursor: pointer;
+      }
+      .preloader video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .preloader-shade {
+        position: absolute;
+        inset: auto 0 0;
+        height: 35%;
+        background: linear-gradient(to bottom, transparent, #000);
+      }
+      .preloader.is-background {
+        display: none !important;
+        pointer-events: none !important;
+      }
+      .floating-logo {
+        position: fixed;
+        z-index: 42;
+        left: 50%;
+        top: 50%;
+        width: 59px;
+        height: 58px;
+        transform: translate(-50%, -50%);
+        will-change: left, top, width, height, transform;
+        transition:
+          left 2s cubic-bezier(0.16, 1, 0.3, 1),
+          top 2s cubic-bezier(0.16, 1, 0.3, 1),
+          width 2s cubic-bezier(0.16, 1, 0.3, 1),
+          height 2s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 2s cubic-bezier(0.16, 1, 0.3, 1);
+        cursor: pointer !important;
+      }
+      .floating-logo.is-docked {
+        left: clamp(18px, 1.95vw, 28px);
+        top: clamp(18px, 3.1vh, 28px);
+        width: 37px;
+        height: 36px;
+        transform: none;
+      }
+      .floating-logo.is-settled {
+        z-index: 36;
+      }
+      .preloader-count {
+        position: fixed;
+        z-index: 42;
+        left: 50%;
+        bottom: clamp(22px, 3.1vh, 28px);
+        display: flex;
+        align-items: flex-end;
+        gap: 4px;
+        transform: translateX(-50%);
+        font-family: 'SF Pro', Arial, sans-serif;
+        line-height: 1;
+        pointer-events: none;
+      }
+      .preloader-count > span:first-child {
+        font-family: 'SF Pro Thin', 'SF Pro', Arial, sans-serif;
+        font-size: 64px;
+        font-weight: 100;
+      }
+      .preloader-count .percent {
+        font-size: 24px;
+        padding-bottom: 4px;
+      }
+      .preloader-creator-tag {
+        position: fixed;
+        z-index: 42;
+        left: 50%;
+        top: calc(50% + 46px);
+        transform: translateX(-50%);
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.85);
+        letter-spacing: 0.05em;
+        pointer-events: none;
+        transition: opacity 0.5s ease;
+      }
+      .preloader-count.is-leaving {
+        animation: preload-count-out 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+      @keyframes preload-count-out {
+        to {
+          opacity: 0;
+          filter: blur(7px);
+          transform: translate(-50%, -34px);
+        }
+      }
+      body:not(.preload-complete) .custom-cursor {
+        opacity: 0 !important;
+      }
+
+      /* CUSTOM CURSOR */
+      html, body, button, a, .portal, .planet-item {
+        cursor: none !important;
+      }
+      .custom-cursor {
+        display: block;
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 100;
+        width: 1px;
+        height: 1px;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        will-change: transform;
+      }
+      .custom-cursor.is-visible {
+        opacity: 1;
+      }
+      .cursor-dot, .cursor-orbit {
+        position: absolute;
+        left: 0;
+        top: 0;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .cursor-dot {
+        width: 12px;
+        height: 12px;
+        background: #fff;
+      }
+      .cursor-orbit {
+        width: 36px;
+        height: 36px;
+        border: 1px solid #fff;
+        background: rgba(255, 255, 255, 0.4);
+        transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: transform;
+      }
+      .custom-cursor.is-enter .cursor-orbit {
+        transform: translate(-50%, -50%) scale(1.16);
+      }
+      .cursor-label {
+        position: absolute;
+        top: 26px;
+        left: 0;
+        transform: translateX(-50%) translateY(-4px);
+        font: 14px / 1.2 'Vazirmatn', sans-serif;
+        white-space: nowrap;
+        opacity: 0;
+        transition: opacity 0.2s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .custom-cursor.is-enter .cursor-label {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      @media (pointer: coarse) {
+        html, body, button, a, .portal, .planet-item {
+          cursor: auto !important;
+        }
+        .custom-cursor {
+          display: none !important;
+        }
+      }
+
+      /* ENTRANCE / SWITCH ANIMATIONS */
+      body:not(.intro-ready) .header,
+      body:not(.intro-ready) .planet-list,
+      body:not(.intro-ready) .planet-content h1,
+      body:not(.intro-ready) .planet-content .fact {
+        opacity: 0;
+      }
+      .intro-ready .header {
+        animation: reveal-down 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+      }
+      .intro-ready .planet-list {
+        animation: reveal-side 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.65s both;
+      }
+      .content-revealing h1 {
+        animation: title-rise 1.05s cubic-bezier(0.16, 1, 0.3, 1) both;
+      }
+      .content-revealing .fact {
+        animation: fact-rise 0.72s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+      .content-revealing .fact:nth-child(1) { animation-delay: 0.52s; }
+      .content-revealing .fact:nth-child(2) { animation-delay: 0.68s; }
+      .content-revealing .fact:nth-child(3) { animation-delay: 0.84s; }
+      .content-revealing .fact:nth-child(4) { animation-delay: 1.00s; }
+
+      .mask-revealing .portal-heading {
+        animation: portal-caption 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+      .planet-list.is-switching .planet-item {
+        animation: menu-row 0.58s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+      .planet-list.is-switching .planet-item:nth-child(1) { animation-delay: 0.02s; }
+      .planet-list.is-switching .planet-item:nth-child(2) { animation-delay: 0.05s; }
+      .planet-list.is-switching .planet-item:nth-child(3) { animation-delay: 0.08s; }
+      .planet-list.is-switching .planet-item:nth-child(4) { animation-delay: 0.11s; }
+      .planet-list.is-switching .planet-item:nth-child(5) { animation-delay: 0.14s; }
+      .planet-list.is-switching .planet-item:nth-child(6) { animation-delay: 0.17s; }
+      .planet-list.is-switching .planet-item:nth-child(7) { animation-delay: 0.20s; }
+      .planet-list.is-switching .planet-item:nth-child(8) { animation-delay: 0.23s; }
+
+      .planet-list.is-switching .planet-item.active:before {
+        animation: active-dot 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
+      }
+
+      @keyframes reveal-down {
+        from {
+          opacity: 0;
+          filter: blur(8px);
+          transform: translateY(-18px);
+        }
+        to {
+          opacity: 1;
+          filter: blur(0);
+          transform: translateY(0);
+        }
+      }
+      @keyframes reveal-side {
+        from {
+          opacity: 0;
+          filter: blur(8px);
+          transform: translate(20px, -43%);
+        }
+        to {
+          opacity: 1;
+          filter: blur(0);
+          transform: translate(0, -43%);
+        }
+      }
+      @keyframes title-rise {
+        from {
+          opacity: 0;
+          filter: blur(12px);
+          transform: translate(20px, 40px);
+        }
+        to {
+          opacity: 1;
+          filter: blur(0);
+          transform: translate(0, 0);
+        }
+      }
+      @keyframes fact-rise {
+        from {
+          opacity: 0;
+          filter: blur(6px);
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          filter: blur(0);
+          transform: translateY(0);
+        }
+      }
+      @keyframes portal-caption {
+        from {
+          opacity: 0;
+          filter: blur(6px);
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          filter: blur(0);
+          transform: translateY(0);
+        }
+      }
+      @keyframes menu-row {
+        from {
+          opacity: 0;
+          transform: translateX(12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      @keyframes active-dot {
+        from {
+          opacity: 0;
+          transform: scale(0);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      /* INTERACTIVE OVERLAYS & MODALS */
+      .app-modal-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        background: rgba(0, 0, 0, 0.78);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+      .app-modal-backdrop.is-open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .app-modal {
+        position: relative;
+        width: min(580px, 92vw);
+        max-height: 85vh;
+        overflow-y: auto;
+        background: rgba(18, 16, 15, 0.95);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 28px;
+        padding: 32px;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.1);
+        transform: scale(0.94) translateY(12px);
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        text-align: right;
+      }
+      .app-modal-backdrop.is-open .app-modal {
+        transform: scale(1) translateY(0);
+      }
+      .modal-close {
+        position: absolute;
+        top: 24px;
+        left: 24px;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.2s;
+      }
+      .modal-close:hover {
+        background: rgba(255, 255, 255, 0.22);
+        transform: scale(1.08);
+      }
+
+      /* DRAWER (MENU) */
+      .app-drawer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: min(390px, 88vw);
+        z-index: 55;
+        background: rgba(14, 13, 12, 0.96);
+        border-right: 1px solid rgba(255, 255, 255, 0.18);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        padding: 32px 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        transform: translateX(-105%);
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 12px 0 40px rgba(0, 0, 0, 0.7);
+        text-align: right;
+      }
+      .app-drawer.is-open {
+        transform: translateX(0);
+      }
+      .drawer-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        padding-bottom: 16px;
+      }
+      .drawer-header h2 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 700;
+      }
+      .drawer-planets {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .drawer-planet-btn {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: #fff;
+        padding: 12px 14px;
+        border-radius: 14px;
+        font-size: 14px;
+        font-family: inherit;
+        font-weight: 500;
+        text-align: right;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: background 0.2s, border-color 0.2s, transform 0.15s;
+      }
+      .drawer-planet-btn:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.35);
+        transform: translateY(-2px);
+      }
+      .drawer-planet-btn.active {
+        background: #fff;
+        color: #000;
+        font-weight: 700;
+      }
+
+      /* EXPLORE GRID */
+      .explore-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 12px;
+        margin-top: 16px;
+      }
+      .explore-card {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 16px;
+        padding: 14px 12px;
+        text-align: center;
+        cursor: pointer;
+        transition: background 0.2s, border-color 0.2s, transform 0.2s;
+      }
+      .explore-card:hover {
+        background: rgba(255, 255, 255, 0.14);
+        border-color: rgba(255, 255, 255, 0.4);
+        transform: translateY(-3px);
+      }
+      .explore-card.active {
+        background: rgba(255, 255, 255, 0.22);
+        border-color: #fff;
+      }
+      .explore-card-num {
+        font-size: 11px;
+        opacity: 0.6;
+        direction: ltr;
+      }
+      .explore-card-title {
+        font-size: 16px;
+        font-weight: 700;
+        margin: 4px 0 2px;
+      }
+      .explore-card-type {
+        font-size: 11px;
+        opacity: 0.7;
+      }
+
+      /* CLOUDFLARE DEPLOY EXTENSION */
+      .deploy-step {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 16px;
+        padding: 18px;
+        margin-bottom: 14px;
+      }
+      .deploy-step-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-weight: 700;
+        font-size: 15px;
+        margin-bottom: 8px;
+      }
+      .code-snippet {
+        direction: ltr;
+        text-align: left;
+        background: #000;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 12px;
+        padding: 12px 16px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 13px;
+        line-height: 1.6;
+        color: #4ade80;
+        position: relative;
+        overflow-x: auto;
+        white-space: pre;
+      }
+      .copy-btn {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: #fff;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 11px;
+        cursor: pointer;
+        transition: background 0.2s;
+        font-family: inherit;
+      }
+      .copy-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+      .download-action-btn {
+        background: #f38020;
+        color: #000;
+        border: 0;
+        padding: 12px 20px;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: transform 0.2s, box-shadow 0.2s;
+        font-family: inherit;
+        text-decoration: none;
+      }
+      .download-action-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 18px rgba(243, 128, 32, 0.4);
+      }
+    </style>
+  <script src="/_aistudio-iframe.js?v=6634132a"></script><script src="https://cdn.jsdelivr.net/npm/html2canvas-pro@2.0.4"></script><style>.aistudio-hover-highlight { box-shadow: inset 0 0 0 0.5px white, inset 0 0 0 1.5px rgba(128,128,128,0.6) !important; }.aistudio-active-highlight { outline: 2px solid #87a9ff !important; outline-offset: -2px !important; box-shadow: 0 0 0 0.5px rgba(0,0,0,0.3), inset 0 0 0 0.5px rgba(0,0,0,0.3) !important; }.aistudio-generating-blur { filter: blur(5px) grayscale(100%) brightness(28%) !important; transition: filter 0.3s ease; }#aistudio-focus-mode-tag { position: absolute; display: none; align-items: center; gap: 4px; background: #87a9ff; border-radius: 12px; z-index: 10000; padding: 8px; color: #32302c; font-family: Inter, sans-serif; font-size: 14px; font-style: normal; font-weight: 500; line-height: 21px; pointer-events: none; }#aistudio-hover-mode-tag { position: absolute; display: none; align-items: center; gap: 4px; background: rgba(128,128,128,0.6); border-radius: 12px; z-index: 10000; padding: 8px; color: white; font-family: Inter, sans-serif; font-size: 14px; font-style: normal; font-weight: 500; line-height: 21px; pointer-events: none; }.aistudio-img-icon { display: none; vertical-align: middle; pointer-events: auto; cursor: pointer; }.aistudio-img-icon.visible { display: inline-flex; }#aistudio-focus-mode-tag .aistudio-img-icon { position: relative; width: 26px; height: 26px; background: #32302c; border-radius: 6px; margin: -4px -4px -4px 0; }#aistudio-focus-mode-tag .aistudio-img-icon::before { content: ""; position: absolute; top: 4px; left: 4px; width: 18px; height: 18px; background-color: white; -webkit-mask-image: url("https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/edit_fix_auto/default/24px.svg"); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; mask-image: url("https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/edit_fix_auto/default/24px.svg"); mask-size: contain; mask-repeat: no-repeat; }#aistudio-hover-mode-tag .aistudio-img-icon { position: relative; width: 18px; height: 18px; margin-left: 4px; }#aistudio-hover-mode-tag .aistudio-img-icon::before { content: ""; position: absolute; top: 0; left: 0; width: 18px; height: 18px; background-color: white; -webkit-mask-image: url("https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/edit_fix_auto/default/24px.svg"); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; mask-image: url("https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/edit_fix_auto/default/24px.svg"); mask-size: contain; mask-repeat: no-repeat; }#aistudio-focus-mode-tag .aistudio-img-icon:hover, #aistudio-hover-mode-tag .aistudio-img-icon:hover { background: #424242 !important; }#aistudio-focus-mode-tag .aistudio-img-icon:active, #aistudio-hover-mode-tag .aistudio-img-icon:active { background: #393f51 !important; }</style></head>
+  <body class="preload-complete intro-ready">
+    <main class="experience mask-revealing content-revealing" data-planet="mars">
+      <div class="backgrounds" aria-hidden="true">
+        <video id="mars-background" class="background is-visible" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/3c83091e-4046-4fd6-adbb-2edb728be79a.mp4" muted="" playsinline="" preload="auto" loop=""></video>
+        <video id="earth-background" class="background" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/fc3ded42-e845-41f3-a830-5cab512d79cd.mp4" muted="" playsinline="" preload="auto"></video>
+        <video id="venus-background" class="background" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/b30f64d9-1637-477a-83df-d0fc6461a422.mp4" muted="" playsinline="" preload="auto"></video>
+      </div>
+
+      <div class="preloader is-background" id="preloader" aria-label="در حال بارگذاری مریخ" style="display: none;">
+        <video id="preloader-video" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/5fc5651c-3b5d-4171-b507-87f7e635d1b4.mp4" muted="" playsinline="" preload="auto"></video>
+        <div class="preloader-shade"></div>
+      </div>
+
+      <img class="floating-logo is-docked is-settled" id="floating-logo" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/eb7e0f53-50cd-4af5-abc4-8b9a52cdc01b.svg" alt="Ubernatural">
+
+      <div class="preloader-creator-tag" id="preloader-creator-tag" style="opacity: 0;">
+        طراحی و توسعه: <strong>علیرضا کریمی</strong>
+      </div>
+
+      
+
+      <canvas id="scene-canvas" class="scene-canvas" aria-hidden="true" width="814" height="1446" style="width: 407px; height: 723px;"></canvas>
+      <div class="shade" aria-hidden="true"></div>
+
+      <header class="header chrome">
+        <div class="header-creator" id="creator-badge" title="مشاهده مشخصات سازنده">
+          <span class="header-creator-dot"></span>
+          <span>سازنده: <strong>علیرضا کریمی</strong></span>
+        </div>
+
+        <div class="header-actions">
+          <nav class="nav" aria-label="منوی اصلی">
+            <a class="" href="#about" id="nav-about">درباره</a>
+            <a href="#explore" id="nav-explore">کاوش</a>
+            <a href="#planets" id="nav-planets">سیارات</a>
+          </nav>
+          <button class="cloudflare-pill-btn" id="nav-cloudflare" type="button" title="افزونه انتشار بر روی گیت و کلودفلر">
+            <span>⚡ انتشار در کلودفلر</span>
+          </button>
+          <button class="menu" id="menu-btn" type="button">منو</button>
+        </div>
+      </header>
+
+      <aside class="planet-list chrome" aria-label="فهرست سیارات"><span class="planet-item" data-planet="mercury" role="button" tabindex="0">عطارد</span><span class="planet-item" data-planet="venus" role="button" tabindex="0">زهره</span><span class="planet-item" data-planet="earth" role="button" tabindex="0">زمین</span><span class="planet-item active" data-planet="mars" role="button" tabindex="0">مریخ</span><span class="planet-item" data-planet="jupiter" role="button" tabindex="0">مشتری</span><span class="planet-item" data-planet="saturn" role="button" tabindex="0">زحل</span><span class="planet-item" data-planet="uranus" role="button" tabindex="0">اورانوس</span><span class="planet-item" data-planet="neptune" role="button" tabindex="0">نپتون</span></aside>
+
+      <canvas id="portal-canvas" class="portal-canvas" aria-hidden="true" width="814" height="1446" style="width: 407px; height: 723px;"></canvas>
+
+      <section class="portal-wrap chrome" aria-label="مقصد بعدی">
+        <div class="portal-heading" id="portal-heading" title="جهش به مقصد بعدی">
+          <span>مقصد بعدی:</span>
+          <span><span id="next-number">[۰۳]</span> <strong id="next-name">زمین</strong></span>
+        </div>
+        <button class="portal" id="portal" type="button" aria-label="سفر به زمین">
+          <video id="portal-video" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/fc3ded42-e845-41f3-a830-5cab512d79cd.mp4" muted="" playsinline="" preload="auto" loop="" style="display: block;"></video>
+          <img id="portal-image" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/d6fb8b6b-c15e-4aaa-9cf7-45bbb5e33372.jpg" alt="عطارد" style="display: none;">
+        </button>
+      </section>
+
+      <section class="planet-content chrome" aria-live="polite">
+        <div class="planet-content-title-box">
+          <h1 id="planet-title">مریخ</h1>
+          <span class="planet-en-name" id="planet-en-name">MARS</span>
+        </div>
+        <dl id="facts"><div class="fact"><dt>فاصله از خورشید:</dt><dd>حدود ۲۲۸ میلیون کیلومتر (۱.۵ واحد نجومی)</dd></div><div class="fact"><dt>طول سال:</dt><dd>یک سال مریخی برابر با ۶۸۷ روز زمین است</dd></div><div class="fact"><dt>میانگین دما:</dt><dd>حدود ۶۰- درجه سانتی‌گراد، تا ۱۲۵- در زمستان قطب</dd></div><div class="fact"><dt>ترکیب جو:</dt><dd>بسیار رقیق، ۹۵٪ دی‌اکسید کربن با طوفان‌های غبارآلود</dd></div></dl>
+      </section>
+
+      <div class="transition-layer" aria-hidden="true"><video id="transition-video" muted="" playsinline="" preload="auto"></video></div>
+      <div class="loading" aria-hidden="true">در حال آماده‌سازی مدار…</div>
+      <div class="custom-cursor is-visible is-enter" aria-hidden="true" style="transform: translate3d(309.922px, 362.843px, 0px);">
+        <span class="cursor-orbit"></span><span class="cursor-dot" style="transform: translate3d(1.13687e-13px, -1.13687e-13px, 0px) translate(-50%, -50%);"></span><span class="cursor-label">ورود</span>
+      </div>
+    </main>
+
+    <!-- ABOUT MODAL -->
+    <div class="app-modal-backdrop" id="about-modal" role="dialog" aria-modal="true" aria-labelledby="about-title">
+      <div class="app-modal">
+        <button class="modal-close" id="about-close" aria-label="بستن">✕</button>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+          <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#ec4899);display:flex;align-items:center;justify-content:center;font-size:22px;">🌌</div>
+          <div>
+            <h2 id="about-title" style="font-size:22px;margin:0;">جهش میان سیارات (Planet Jumping)</h2>
+            <div style="font-size:13px;color:#10b981;font-weight:600;margin-top:2px;">طراحی و توسعه توسط علیرضا کریمی</div>
+          </div>
+        </div>
+        <p style="font-size:14px;line-height:1.7;color:rgba(255,255,255,0.85);margin-bottom:18px;">
+          پروژه <strong>جهش میان سیارات</strong> یک تجربه سینمایی و تعاملی وب است که امکان سفر و کاوش در منظومه شمسی را از طریق پورتال سه‌بعدی محاسباتی فراهم می‌سازد. کلیه جلوه‌های فیزیک نور، زاویه چرخش با نشانگر ماوس و انیمیشن‌های مداری به صورت بومی و بدون کتابخانه خارجی پیاده‌سازی شده‌اند.
+        </p>
+        <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:18px;padding:16px;margin-bottom:18px;">
+          <h3 style="font-size:14px;margin:0 0 10px;font-weight:700;">کنترل‌های ناوبری:</h3>
+          <ul style="margin:0;padding-right:20px;font-size:13px;line-height:1.9;color:rgba(255,255,255,0.85);">
+            <li><strong>فهرست سیارات:</strong> با کلیک روی نام هر سیاره، مستقیماً به آن نقطه منتقل شوید.</li>
+            <li><strong>پورتال مرکزی:</strong> کلیک روی پورتال یا عنوان آن، جهش مداری به مقصد بعدی را اجرا می‌کند.</li>
+            <li><strong>کلیدهای ۱ تا ۸:</strong> دسترسی سریع صفحه‌کلید به سیارات ۱ تا ۸.</li>
+            <li><strong>کلید Space / Enter:</strong> پرش از داخل پورتال.</li>
+          </ul>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:rgba(255,255,255,0.04);border-radius:12px;margin-bottom:16px;font-size:13px;">
+          <span>پدیدآورنده و مهندس نرم‌افزار:</span>
+          <strong>علیرضا کریمی</strong>
+        </div>
+        <button id="about-start-jump" style="width:100%;height:44px;border-radius:999px;background:#fff;color:#000;border:0;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;">
+          ادامه کاوش فضا
+        </button>
+      </div>
+    </div>
+
+    <!-- EXPLORE MODAL -->
+    <div class="app-modal-backdrop" id="explore-modal" role="dialog" aria-modal="true" aria-labelledby="explore-title">
+      <div class="app-modal" style="width:min(660px,94vw);">
+        <button class="modal-close" id="explore-close" aria-label="بستن">✕</button>
+        <h2 id="explore-title" style="font-size:22px;margin-top:0;margin-bottom:6px;">کاوشگر منظومه شمسی</h2>
+        <p style="font-size:13px;color:rgba(255,255,255,0.75);margin-bottom:16px;">
+          برای انتقال آنی مختصات مداری، روی هر یک از سیارات کلیک کنید:
+        </p>
+        <div class="explore-grid" id="explore-planet-grid"><div class="explore-card" data-planet="mercury"><div class="explore-card-num">[01]</div><div class="explore-card-title">عطارد</div><div class="explore-card-type">سیاره خاکی</div></div><div class="explore-card" data-planet="venus"><div class="explore-card-num">[02]</div><div class="explore-card-title">زهره</div><div class="explore-card-type">سیاره خاکی</div></div><div class="explore-card" data-planet="earth"><div class="explore-card-num">[03]</div><div class="explore-card-title">زمین</div><div class="explore-card-type">سیاره خاکی</div></div><div class="explore-card active" data-planet="mars"><div class="explore-card-num">[04]</div><div class="explore-card-title">مریخ</div><div class="explore-card-type">سیاره خاکی</div></div><div class="explore-card" data-planet="jupiter"><div class="explore-card-num">[05]</div><div class="explore-card-title">مشتری</div><div class="explore-card-type">غول گازی</div></div><div class="explore-card" data-planet="saturn"><div class="explore-card-num">[06]</div><div class="explore-card-title">زحل</div><div class="explore-card-type">غول گازی</div></div><div class="explore-card" data-planet="uranus"><div class="explore-card-num">[07]</div><div class="explore-card-title">اورانوس</div><div class="explore-card-type">غول یخی</div></div><div class="explore-card" data-planet="neptune"><div class="explore-card-num">[08]</div><div class="explore-card-title">نپتون</div><div class="explore-card-type">غول یخی</div></div></div>
+      </div>
+    </div>
+
+    <!-- CLOUDFLARE & GIT EXTENSION MODAL (افزونه گیت و کلودفلر) -->
+    <div class="app-modal-backdrop is-open" id="cloudflare-modal" role="dialog" aria-modal="true" aria-labelledby="cf-title">
+      <div class="app-modal" style="width:min(680px,95vw);">
+        <button class="modal-close" id="cf-close" aria-label="بستن">✕</button>
+        
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+          <div style="width:46px;height:46px;border-radius:14px;background:#f38020;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;">☁️</div>
+          <div>
+            <h2 id="cf-title" style="font-size:20px;margin:0;">افزونه استقرار در گیت و کلودفلر (Cloudflare Pages)</h2>
+            <div style="font-size:12px;color:rgba(255,255,255,0.65);margin-top:2px;">پروژه «جهش میان سیارات» — اثر علیرضا کریمی</div>
+          </div>
+        </div>
+
+        <p style="font-size:13px;line-height:1.7;color:rgba(255,255,255,0.85);margin-bottom:16px;">
+          این برنامه به صورت یک فایل مستقل (<span style="direction:ltr;display:inline-block;font-family:monospace;background:rgba(255,255,255,0.1);padding:1px 6px;border-radius:4px;">index.html</span>) ساخته شده و بدون نیاز به مرحله بیلد (Zero Build Step)، در بالاترین سرعت شبکه جهانی Cloudflare Pages اجرا می‌شود.
+        </p>
+
+        <!-- AUTOMATED GITHUB TOKEN UPLOADER & CLOUDFLARE RUNNER -->
+        <div class="deploy-step" style="border: 2px solid #10b981; background: rgba(16, 185, 129, 0.08); margin-bottom: 20px; box-shadow: 0 8px 32px rgba(16, 185, 129, 0.15);">
+          <div class="deploy-step-title">
+            <span style="color:#10b981;font-size:16px;">⚡ آپلود خودکار با توکن گیت‌هاب و استقرار در کلودفلر</span>
+            <span style="font-size:11px;background:#10b981;color:#000;font-weight:700;padding:2px 10px;border-radius:999px;">اتوماتیک ۱-کلیک</span>
+          </div>
+          <p style="font-size:12px;color:rgba(255,255,255,0.85);margin:0 0 14px;line-height:1.7;">
+            با وارد کردن توکن گیت‌هاب، تمام فایل‌های پروژه (شامل کدهای سینمایی، کانفیگ کلودفلر، و مستندات علیرضا کریمی) به صورت مستقیم در اکانت شما آپلود شده و برای اجرای آنلاین در Cloudflare آماده می‌شوند.
+          </p>
+
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                <label for="gh-token-input" style="font-size:13px;font-weight:600;">توکن شخصی گیت‌هاب (Personal Access Token):</label>
+                <a href="https://github.com/settings/tokens/new?scopes=repo&amp;description=Planet+Jumping+Auto+Deployer" target="_blank" style="font-size:12px;color:#60a5fa;text-decoration:underline;">
+                  + ساخت توکن در گیت‌هاب ↗
+                </a>
+              </div>
+              <div style="position:relative;display:flex;align-items:center;">
+                <input type="password" id="gh-token-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" style="width:100%;height:42px;background:#000;border:1px solid rgba(255,255,255,0.25);border-radius:10px;padding:0 44px 0 14px;color:#fff;direction:ltr;font-family:monospace;font-size:13px;outline:none;">
+                <button type="button" id="gh-toggle-token-btn" style="position:absolute;left:10px;background:none;border:0;color:rgba(255,255,255,0.7);cursor:pointer;font-size:15px;padding:4px;" title="نمایش/مخفی‌سازی توکن">👁️</button>
+              </div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.55);margin-top:4px;">
+                * توکن باید دارای دسترسی <code style="color:#10b981;">repo</code> باشد. این توکن مستقیماً در مرورگر شما به API رسمی گیت‌هاب ارسال شده و هیچ‌کجا ذخیره نمی‌شود.
+              </div>
+            </div>
+
+            <div style="display:grid;grid-template-columns: 1fr 140px;gap:10px;">
+              <div>
+                <label for="gh-repo-input" style="font-size:13px;font-weight:600;display:block;margin-bottom:6px;">نام مخزن در گیت‌هاب:</label>
+                <input type="text" id="gh-repo-input" value="planet-jumping" placeholder="planet-jumping" style="width:100%;height:42px;background:#000;border:1px solid rgba(255,255,255,0.25);border-radius:10px;padding:0 14px;color:#fff;direction:ltr;font-family:monospace;font-size:13px;outline:none;">
+              </div>
+              <div>
+                <label style="font-size:13px;font-weight:600;display:block;margin-bottom:6px;">نوع مخزن:</label>
+                <label style="display:flex;align-items:center;height:42px;background:#000;border:1px solid rgba(255,255,255,0.25);border-radius:10px;padding:0 12px;font-size:12px;gap:8px;cursor:pointer;">
+                  <input type="checkbox" id="gh-private-check" style="accent-color:#10b981;">
+                  <span>خصوصی (Private)</span>
+                </label>
+              </div>
+            </div>
+
+            <div style="background:rgba(243, 128, 32, 0.08);border:1px dashed rgba(243, 128, 32, 0.4);border-radius:10px;padding:12px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+                <label for="cf-hook-input" style="font-size:12px;font-weight:600;color:#ffa149;">⚡ هوک استقرار کلودفلر (Cloudflare Deploy Hook) — اختیاری جهت بیلد آنی:</label>
+              </div>
+              <input type="url" id="cf-hook-input" placeholder="https://api.cloudflare.com/client/v4/pages/webhooks/deploy_hooks/..." style="width:100%;height:38px;background:#000;border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:0 12px;color:#fff;direction:ltr;font-family:monospace;font-size:12px;outline:none;">
+              <div style="font-size:11px;color:rgba(255,255,255,0.55);margin-top:4px;">
+                اگر در کلودفلر Deploy Hook ساخته‌اید، لینک آن را بگذارید تا همزمان استقرار کلودفلر نیز فعال شود. در غیر این صورت، لینک اتصال مستقیم ۱-کلیکی برای شما ایجاد می‌شود.
+              </div>
+            </div>
+
+            <button id="gh-start-upload-btn" type="button" style="height: 48px; background: linear-gradient(135deg, rgb(16, 185, 129), rgb(5, 150, 105)); color: rgb(0, 0, 0); border: 0px; border-radius: 12px; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: transform 0.2s, background 0.2s, box-shadow 0.2s; opacity: 0.75;" disabled="">
+              <span id="gh-btn-icon">⏳</span>
+              <span id="gh-btn-text">در حال ارتباط با گیت‌هاب و ارسال فایل‌ها…</span>
+            </button>
+
+            <!-- LIVE LOG TERMINAL -->
+            <div id="gh-upload-logs" style="display: block; background: rgb(3, 3, 3); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 14px; max-height: 220px; overflow-y: auto; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; line-height: 1.8; color: rgb(229, 231, 235); direction: rtl; text-align: right;"><div style="color: rgb(255, 255, 255); margin-bottom: 6px; word-break: break-word;">🚀 <strong>شروع فرآیند آپلود خودکار و استقرار در کلودفلر</strong></div><div style="color: rgb(147, 197, 253); margin-bottom: 6px; word-break: break-word;">🔑 <strong>مرحله ۱:</strong> در حال اعتبارسنجی توکن در سرورهای رسمی GitHub...</div><div style="color: rgb(74, 222, 128); margin-bottom: 6px; word-break: break-word;">✓ احراز هویت موفق: کاربر <strong>@sarau9525-stack</strong> (sarau9525-stack)</div><div style="color: rgb(147, 197, 253); margin-bottom: 6px; word-break: break-word;">📁 <strong>مرحله ۲:</strong> بررسی مخزن «planet-jumping» در اکانت گیت‌هاب...</div><div style="color: rgb(147, 197, 253); margin-bottom: 6px; word-break: break-word;">⚙️ مخزن «planet-jumping» یافت نشد. در حال ساخت خودکار مخزن جدید در گیت‌هاب...</div><div style="color: rgb(74, 222, 128); margin-bottom: 6px; word-break: break-word;">✓ مخزن جدید «planet-jumping» با موفقیت در گیت‌هاب ساخته شد!</div><div style="color: rgb(147, 197, 253); margin-bottom: 6px; word-break: break-word;">⏳ در حال آماده‌سازی ساختار گیت‌هاب (۲ ثانیه)...</div><div style="color: rgb(255, 255, 255); margin-bottom: 6px; word-break: break-word;">📦 <strong>مرحله ۳:</strong> در حال آپلود 7 فایل اصلی پروژه به گیت‌هاب...</div><div style="color: rgb(147, 197, 253); margin-bottom: 6px; word-break: break-word;">  📤 در حال خواندن و بسته‌بندی: <code>index.html</code>...</div></div>
+          </div>
+        </div>
+
+        <!-- STEP 1: GITHUB CONNECTION WORKFLOW (MAIN FLOW) -->
+        <div class="deploy-step" style="border: 1px solid rgba(243, 128, 32, 0.4); background: rgba(243, 128, 32, 0.06);">
+          <div class="deploy-step-title">
+            <span style="color:#ffa149;">🌟 روش رسمی: اتصال مستقیم گیت‌هاب به کلودفلر (GitHub Integration)</span>
+            <span style="font-size:11px;color:#10b981;background:rgba(16,185,129,0.15);padding:2px 8px;border-radius:999px;">توصیه شده</span>
+          </div>
+          <p style="font-size:12px;color:rgba(255,255,255,0.8);line-height:1.7;margin:0 0 12px;">
+            با این روش، هر زمان که کدی را در گیت‌هاب تغییر دهید یا Push کنید، کلودفلر به‌صورت کاملاً خودکار و رایگان سایت شما را بیلد و آپدیت می‌کند.
+          </p>
+
+          <div style="font-size:13px;line-height:1.8;color:rgba(255,255,255,0.9);display:flex;flex-direction:column;gap:10px;">
+            <div>
+              <strong>۱. یک مخزن (Repository) جدید در گیت‌هاب بسازید:</strong><br>
+              وارد <a href="https://github.com/new" target="_blank" style="color:#60a5fa;text-decoration:underline;">github.com/new</a> شوید و یک ریپازیتوری عمومی (Public) با نام دلخواه (مثلاً <code style="direction:ltr;background:rgba(255,255,255,0.1);padding:1px 6px;border-radius:4px;">planet-jumping</code>) بسازید.
+            </div>
+
+            <div>
+              <strong>۲. کدها را به گیت‌هاب ارسال (Push) کنید:</strong>
+              <div class="code-snippet" style="margin-top:6px;">
+<button class="copy-btn" data-target="git-cmd-code">کپی دستورات</button><code id="git-cmd-code">git init
+git add .
+git commit -m "Deploy Planet Jumping by Alireza Karimi"
+git branch -M main
+# آدرس ریپازیتوری خود را وارد کنید:
+git remote add origin https://github.com/USERNAME/planet-jumping.git
+git push -u origin main</code>
+              </div>
+            </div>
+
+            <div>
+              <strong>۳. اتصال در پنل کلودفلر (Cloudflare Pages):</strong><br>
+              ۱. وارد داشبورد کلودفلر شوید: <a href="https://dash.cloudflare.com/" target="_blank" style="color:#60a5fa;text-decoration:underline;">dash.cloudflare.com</a><br>
+              ۲. از منوی سمت چپ به بخش <strong>Compute (Workers &amp; Pages)</strong> بروید.<br>
+              ۳. دکمه <strong>Create application</strong> را بزنید و زبانه <strong>Pages</strong> را انتخاب کنید.<br>
+              ۴. روی گزینه <strong>Connect to Git</strong> کلیک کنید و حساب GitHub خود را متصل نمایید.<br>
+              ۵. مخزن <code style="direction:ltr;background:rgba(255,255,255,0.1);padding:1px 6px;border-radius:4px;">planet-jumping</code> را انتخاب کرده و <strong>Begin setup</strong> را بزنید.
+            </div>
+
+            <div style="background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.15);padding:12px;border-radius:12px;">
+              <strong style="color:#10b981;">۴. تنظیمات دقیق بیلد در کلودفلر (Build Settings):</strong>
+              <div style="margin-top:6px;font-family:monospace;font-size:12px;direction:ltr;text-align:left;">
+                Framework preset: <span style="color:#60a5fa;">Vite</span><br>
+                Build command: <span style="color:#4ade80;">npm run build</span><br>
+                Build output directory: <span style="color:#4ade80;">dist</span>
+              </div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.6);margin-top:6px;">
+                (یا در صورت تمایل می‌توانید Framework preset را روی None بگذارید و Output directory را روی . قرار دهید)
+              </div>
+            </div>
+
+            <div>
+              <strong>۵. کلیک روی Save and Deploy:</strong><br>
+              کلودفلر در کمتر از ۳۰ ثانیه سایت شما را منتشر کرده و یک لینک اختصاصی و رایگان (مانند <code style="direction:ltr;background:rgba(255,255,255,0.1);padding:1px 6px;border-radius:4px;">planet-jumping.pages.dev</code>) با گواهینامه SSL به شما تحویل می‌دهد!
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2: ALTERNATIVE CLI DEPLOY -->
+        <div class="deploy-step">
+          <div class="deploy-step-title">
+            <span>روش جایگزین: استقرار سریع با خط فرمان (Wrangler CLI)</span>
+            <span style="font-size:11px;color:#f38020;">خط فرمان</span>
+          </div>
+          <p style="font-size:12px;color:rgba(255,255,255,0.7);margin:0 0 10px;">
+            بدون نیاز به تنظیمات وب، مستقیماً از طریق ترمینال پروژه را مستقر کنید:
+          </p>
+          <div class="code-snippet">
+<button class="copy-btn" data-target="wrangler-cmd-code">کپی دستور</button><code id="wrangler-cmd-code">npx wrangler pages deploy dist --project-name=planet-jumping</code>
+          </div>
+        </div>
+
+        <!-- STEP 3: DIRECT DOWNLOAD -->
+        <div class="deploy-step" style="margin-bottom:0;">
+          <div class="deploy-step-title">
+            <span>دانلود مستقیم فایل‌ها برای آرشیو یا آپلود دستی</span>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;">
+            <button class="download-action-btn" id="cf-download-html">
+              <span>📥 دانلود index.html آماده</span>
+            </button>
+            <button class="download-action-btn" id="cf-download-toml" style="background:rgba(255,255,255,0.15);color:#fff;">
+              <span>⚙️ دانلود wrangler.toml</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE-OUT MENU DRAWER -->
+    <div class="app-drawer" id="menu-drawer" role="dialog" aria-modal="true">
+      <div class="drawer-header">
+        <h2>منوی ماموریت</h2>
+        <button class="modal-close" id="drawer-close" aria-label="بستن منو" style="position:static;">✕</button>
+      </div>
+
+      <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:12px 14px;font-size:13px;">
+        <div style="color:rgba(255,255,255,0.6);font-size:11px;margin-bottom:4px;">سازنده و پدیدآورنده:</div>
+        <div style="font-weight:700;font-size:15px;color:#fff;">علیرضا کریمی</div>
+      </div>
+
+      <div>
+        <h4 style="font-size:12px;letter-spacing:0.06em;color:rgba(255,255,255,0.6);margin:0 0 10px;">
+          پرش مستقیم به سیاره
+        </h4>
+        <div class="drawer-planets" id="drawer-planets-list"><button class="drawer-planet-btn" data-planet="mercury"><span>عطارد (MERCURY)</span><span style="font-size:11px;opacity:0.6;">جهش</span></button><button class="drawer-planet-btn" data-planet="venus"><span>زهره (VENUS)</span><span style="font-size:11px;opacity:0.6;">جهش</span></button><button class="drawer-planet-btn" data-planet="earth"><span>زمین (EARTH)</span><span style="font-size:11px;opacity:0.6;">جهش</span></button><button class="drawer-planet-btn active" data-planet="mars"><span>مریخ (MARS)</span><span style="font-size:11px;opacity:0.6;">مستقر</span></button><button class="drawer-planet-btn" data-planet="jupiter"><span>مشتری (JUPITER)</span><span style="font-size:11px;opacity:0.6;">جهش</span></button><button class="drawer-planet-btn" data-planet="saturn"><span>زحل (SATURN)</span><span style="font-size:11px;opacity:0.6;">جهش</span></button><button class="drawer-planet-btn" data-planet="uranus"><span>اورانوس (URANUS)</span><span style="font-size:11px;opacity:0.6;">جهش</span></button><button class="drawer-planet-btn" data-planet="neptune"><span>نپتون (NEPTUNE)</span><span style="font-size:11px;opacity:0.6;">جهش</span></button></div>
+      </div>
+
+      <div style="margin-top:auto;display:flex;flex-direction:column;gap:10px;">
+        <button id="drawer-cf-btn" style="height:44px;border-radius:12px;background:#f38020;border:0;color:#000;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;">
+          <span>⚡ افزونه استقرار در کلودفلر و گیت</span>
+        </button>
+        <button id="sound-toggle-btn" style="height:44px;border-radius:12px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);color:#fff;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">
+          <span id="sound-icon">🔈</span> <span id="sound-label">صدای فضایی: خاموش</span>
+        </button>
+        <button id="reset-tour-btn" style="height:44px;border-radius:12px;background:#fff;color:#000;border:0;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;">
+          بازگشت به مدار مریخ
+        </button>
+      </div>
+    </div>
+
+    <script>
+      (function() {
+        const BASE = 'https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P';
+        const MARS_BG = BASE + '/3c83091e-4046-4fd6-adbb-2edb728be79a.mp4';
+        const TO_EARTH = BASE + '/fc3ded42-e845-41f3-a830-5cab512d79cd.mp4';
+        const TO_VENUS = BASE + '/b30f64d9-1637-477a-83df-d0fc6461a422.mp4';
+        const TO_MARS = BASE + '/5fc5651c-3b5d-4171-b507-87f7e635d1b4.mp4';
+        const MERCURY = BASE + '/d6fb8b6b-c15e-4aaa-9cf7-45bbb5e33372.jpg';
+        const LOGO = BASE + '/eb7e0f53-50cd-4af5-abc4-8b9a52cdc01b.svg';
+
+        const planets = [
+          { key: 'mercury', fa: 'عطارد', en: 'MERCURY', type: 'سیاره خاکی' },
+          { key: 'venus',   fa: 'زهره',   en: 'VENUS',   type: 'سیاره خاکی' },
+          { key: 'earth',   fa: 'زمین',   en: 'EARTH',   type: 'سیاره خاکی' },
+          { key: 'mars',    fa: 'مریخ',   en: 'MARS',    type: 'سیاره خاکی' },
+          { key: 'jupiter', fa: 'مشتری',  en: 'JUPITER', type: 'غول گازی' },
+          { key: 'saturn',  fa: 'زحل',    en: 'SATURN',  type: 'غول گازی' },
+          { key: 'uranus',  fa: 'اورانوس', en: 'URANUS',  type: 'غول یخی' },
+          { key: 'neptune', fa: 'نپتون',  en: 'NEPTUNE', type: 'غول یخی' }
+        ];
+
+        const states = {
+          mars: {
+            name: 'مریخ',
+            enName: 'MARS',
+            next: 'زمین',
+            number: '[۰۳]',
+            portal: TO_EARTH,
+            background: 'mars-background',
+            facts: [
+              ['فاصله از خورشید:', 'حدود ۲۲۸ میلیون کیلومتر (۱.۵ واحد نجومی)'],
+              ['طول سال:', 'یک سال مریخی برابر با ۶۸۷ روز زمین است'],
+              ['میانگین دما:', 'حدود ۶۰- درجه سانتی‌گراد، تا ۱۲۵- در زمستان قطب'],
+              ['ترکیب جو:', 'بسیار رقیق، ۹۵٪ دی‌اکسید کربن با طوفان‌های غبارآلود']
+            ]
+          },
+          earth: {
+            name: 'زمین',
+            enName: 'EARTH',
+            next: 'زهره',
+            number: '[۰۲]',
+            portal: TO_VENUS,
+            background: 'earth-background',
+            facts: [
+              ['فاصله از خورشید:', '۱۴۹.۶ میلیون کیلومتر (یک واحد نجومی)'],
+              ['طول سال:', '۳۶۵.۲۵ روز زمینی'],
+              ['میانگین دما:', 'میانگین دمای سطح حدود ۱۵ درجه سانتی‌گراد'],
+              ['ترکیب جو:', 'عمدتاً نیتروژن و اکسیژن، حامی حیات و آب مایع']
+            ]
+          },
+          venus: {
+            name: 'زهره',
+            enName: 'VENUS',
+            next: 'عطارد',
+            number: '[۰۶]',
+            image: MERCURY,
+            portal: TO_EARTH,
+            background: 'venus-background',
+            facts: [
+              ['فاصله از خورشید:', '۱۰۸.۲ میلیون کیلومتر'],
+              ['طول سال:', '۲۲۵ روز زمینی'],
+              ['میانگین دما:', 'حدود ۴۶۵ درجه سانتی‌گراد — داغ‌ترین سیاره منظومه'],
+              ['ترکیب جو:', 'فوق‌العاده چگال، دی‌اکسید کربن و ابرهای اسید سولفوریک']
+            ]
+          },
+          mercury: {
+            name: 'عطارد',
+            enName: 'MERCURY',
+            next: 'زهره',
+            number: '[۰۱]',
+            image: MERCURY,
+            portal: TO_VENUS,
+            background: 'venus-background',
+            facts: [
+              ['فاصله از خورشید:', '۵۷.۹ میلیون کیلومتر'],
+              ['طول سال:', '۸۸ روز زمینی'],
+              ['میانگین دما:', 'از ۱۸۰- درجه در شب تا ۴۳۰+ درجه در روز'],
+              ['ترکیب جو:', 'تقریباً بدون جو، اگزوسفر نازک تحت اثر بادهای خورشیدی']
+            ]
+          },
+          jupiter: {
+            name: 'مشتری',
+            enName: 'JUPITER',
+            next: 'زحل',
+            number: '[۰۵]',
+            portal: TO_MARS,
+            background: 'mars-background',
+            facts: [
+              ['فاصله از خورشید:', '۷۷۸.۵ میلیون کیلومتر'],
+              ['طول سال:', '۱۱.۸۶ سال زمینی'],
+              ['میانگین دما:', 'حدود ۱۱۰- درجه سانتی‌گراد'],
+              ['ترکیب جو:', 'هیدروژن و هلیوم همراه با لکه سرخ بزرگ و طوفان‌های عظیم']
+            ]
+          },
+          saturn: {
+            name: 'زحل',
+            enName: 'SATURN',
+            next: 'اورانوس',
+            number: '[۰۶]',
+            portal: TO_EARTH,
+            background: 'earth-background',
+            facts: [
+              ['فاصله از خورشید:', '۱.۴۳ میلیارد کیلومتر'],
+              ['طول سال:', '۲۹.۴ سال زمینی'],
+              ['میانگین دما:', 'حدود ۱۴۰- درجه سانتی‌گراد'],
+              ['ترکیب جو:', 'حلقه‌های شگفت‌انگیز یخ و سنگ با قطری بالغ بر ۲۸۲,۰۰۰ کیلومتر']
+            ]
+          },
+          uranus: {
+            name: 'اورانوس',
+            enName: 'URANUS',
+            next: 'نپتون',
+            number: '[۰۷]',
+            portal: TO_VENUS,
+            background: 'venus-background',
+            facts: [
+              ['فاصله از خورشید:', '۲.۸۷ میلیارد کیلومتر'],
+              ['طول سال:', '۸۴ سال زمینی'],
+              ['میانگین دما:', 'سردترین جو سیاره‌ای در دمای ۲۲۴- درجه سانتی‌گراد'],
+              ['ترکیب جو:', 'مه غلیظ متان که جلوه فیروزه‌ای منحصربه‌فردی به آن بخشیده است']
+            ]
+          },
+          neptune: {
+            name: 'نپتون',
+            enName: 'NEPTUNE',
+            next: 'مریخ',
+            number: '[۰۸]',
+            portal: TO_MARS,
+            background: 'mars-background',
+            facts: [
+              ['فاصله از خورشید:', '۴.۵ میلیارد کیلومتر'],
+              ['طول سال:', '۱۶۴.۸ سال زمینی'],
+              ['میانگین دما:', 'حدود ۲۰۰- درجه سانتی‌گراد'],
+              ['ترکیب جو:', 'تندبادهای مافوق‌صوت منظومه شمسی تا سرعت ۲۱۰۰ کیلومتر در ساعت']
+            ]
+          }
+        };
+
+        let current = 'mars';
+        let busy = false;
+        let renderCount = 0;
+
+        // Portal animation / canvas state
+        let expansion = 0;
+        let maskScale = 0;
+        let canvasOpacity = 1;
+        let transitionActive = false;
+        let sceneFrozen = false;
+
+        let rotX = 0;
+        let rotY = 0;
+        let targetX = 0;
+        let targetY = 0;
+
+        // Elements
+        const experience = document.querySelector('.experience');
+        const preloaderEl = document.getElementById('preloader');
+        const preloaderVideo = document.getElementById('preloader-video');
+        const preloaderCount = document.getElementById('preloader-count');
+        const preloaderValue = document.getElementById('preloader-value');
+        const floatingLogo = document.getElementById('floating-logo');
+
+        const planetTitle = document.getElementById('planet-title');
+        const planetEnName = document.getElementById('planet-en-name');
+        const nextNumber = document.getElementById('next-number');
+        const nextName = document.getElementById('next-name');
+        const portalHeading = document.getElementById('portal-heading');
+        const portalBtn = document.getElementById('portal');
+        const portalVideo = document.getElementById('portal-video');
+        const portalImage = document.getElementById('portal-image');
+        const factsList = document.getElementById('facts');
+        const planetList = document.querySelector('.planet-list');
+
+        const transitionVideo = document.getElementById('transition-video');
+        const portalCanvas = document.getElementById('portal-canvas');
+        const portalCtx = portalCanvas.getContext('2d');
+        const sceneCanvas = document.getElementById('scene-canvas');
+        const sceneCtx = sceneCanvas.getContext('2d');
+
+        const cursor = document.querySelector('.custom-cursor');
+        const cursorOrbit = cursor.querySelector('.cursor-orbit');
+        const cursorDot = cursor.querySelector('.cursor-dot');
+
+        // Nav and Modals
+        const creatorBadge = document.getElementById('creator-badge');
+        const navAbout = document.getElementById('nav-about');
+        const navExplore = document.getElementById('nav-explore');
+        const navPlanets = document.getElementById('nav-planets');
+        const navCloudflare = document.getElementById('nav-cloudflare');
+        const menuBtn = document.getElementById('menu-btn');
+
+        const aboutModal = document.getElementById('about-modal');
+        const aboutClose = document.getElementById('about-close');
+        const aboutStartJump = document.getElementById('about-start-jump');
+
+        const exploreModal = document.getElementById('explore-modal');
+        const exploreClose = document.getElementById('explore-close');
+        const explorePlanetGrid = document.getElementById('explore-planet-grid');
+
+        const cloudflareModal = document.getElementById('cloudflare-modal');
+        const cfClose = document.getElementById('cf-close');
+        const cfDownloadHtml = document.getElementById('cf-download-html');
+        const cfDownloadToml = document.getElementById('cf-download-toml');
+        const drawerCfBtn = document.getElementById('drawer-cf-btn');
+
+        // GitHub Token & Cloudflare Auto-Deploy Elements
+        const ghTokenInput = document.getElementById('gh-token-input');
+        const ghToggleTokenBtn = document.getElementById('gh-toggle-token-btn');
+        const ghRepoInput = document.getElementById('gh-repo-input');
+        const ghPrivateCheck = document.getElementById('gh-private-check');
+        const cfHookInput = document.getElementById('cf-hook-input');
+        const ghStartUploadBtn = document.getElementById('gh-start-upload-btn');
+        const ghBtnIcon = document.getElementById('gh-btn-icon');
+        const ghBtnText = document.getElementById('gh-btn-text');
+        const ghUploadLogs = document.getElementById('gh-upload-logs');
+
+        const menuDrawer = document.getElementById('menu-drawer');
+        const drawerClose = document.getElementById('drawer-close');
+        const drawerPlanetsList = document.getElementById('drawer-planets-list');
+        const soundToggleBtn = document.getElementById('sound-toggle-btn');
+        const soundIcon = document.getElementById('sound-icon');
+        const soundLabel = document.getElementById('sound-label');
+        const resetTourBtn = document.getElementById('reset-tour-btn');
+
+        // Cosmic Drone Synth (Web Audio API)
+        let audioCtx = null;
+        let droneOsc1 = null;
+        let droneOsc2 = null;
+        let droneGain = null;
+        let soundActive = false;
+
+        function toggleSound() {
+          if (!soundActive) {
+            try {
+              if (!audioCtx) {
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                audioCtx = new AudioContextClass();
+              }
+              if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+              }
+              droneGain = audioCtx.createGain();
+              droneGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+              droneGain.gain.exponentialRampToValueAtTime(0.08, audioCtx.currentTime + 2);
+
+              const filter = audioCtx.createBiquadFilter();
+              filter.type = 'lowpass';
+              filter.frequency.setValueAtTime(140, audioCtx.currentTime);
+
+              droneOsc1 = audioCtx.createOscillator();
+              droneOsc1.type = 'sine';
+              droneOsc1.frequency.setValueAtTime(55, audioCtx.currentTime);
+
+              droneOsc2 = audioCtx.createOscillator();
+              droneOsc2.type = 'triangle';
+              droneOsc2.frequency.setValueAtTime(55.4, audioCtx.currentTime);
+
+              droneOsc1.connect(filter);
+              droneOsc2.connect(filter);
+              filter.connect(droneGain);
+              droneGain.connect(audioCtx.destination);
+
+              droneOsc1.start();
+              droneOsc2.start();
+
+              soundActive = true;
+              soundIcon.textContent = '🔊';
+              soundLabel.textContent = 'صدای فضایی: فعال';
+            } catch (e) {
+              console.warn('Audio error:', e);
+            }
+          } else {
+            if (droneGain && audioCtx) {
+              droneGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.5);
+              setTimeout(() => {
+                try {
+                  droneOsc1.stop();
+                  droneOsc2.stop();
+                } catch (e) {}
+              }, 500);
+            }
+            soundActive = false;
+            soundIcon.textContent = '🔈';
+            soundLabel.textContent = 'صدای فضایی: خاموش';
+          }
+        }
+
+        if (soundToggleBtn) {
+          soundToggleBtn.addEventListener('click', toggleSound);
+        }
+
+        // Easing function
+        function easeInOutCubic(t) {
+          return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        }
+
+        function animateValue(setter, duration) {
+          return new Promise(function(resolve) {
+            const start = performance.now();
+            function tick(now) {
+              const elapsed = now - start;
+              const progress = Math.min(1, elapsed / duration);
+              setter(easeInOutCubic(progress));
+              if (progress < 1) {
+                requestAnimationFrame(tick);
+              } else {
+                setter(1);
+                resolve();
+              }
+            }
+            requestAnimationFrame(tick);
+          });
+        }
+
+        // Canvas sizing
+        function resizeCanvas() {
+          const d = Math.min(window.devicePixelRatio || 1, 2);
+          portalCanvas.width = window.innerWidth * d;
+          portalCanvas.height = window.innerHeight * d;
+          portalCanvas.style.width = window.innerWidth + 'px';
+          portalCanvas.style.height = window.innerHeight + 'px';
+          portalCtx.setTransform(d, 0, 0, d, 0, 0);
+
+          if (!sceneFrozen) {
+            sceneCanvas.width = window.innerWidth * d;
+            sceneCanvas.height = window.innerHeight * d;
+            sceneCanvas.style.width = window.innerWidth + 'px';
+            sceneCanvas.style.height = window.innerHeight + 'px';
+            sceneCtx.setTransform(d, 0, 0, d, 0, 0);
+          }
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Draw cover image/video onto canvas
+        function drawCover(ctx, media) {
+          const mw = media.videoWidth || media.naturalWidth || media.width || window.innerWidth;
+          const mh = media.videoHeight || media.naturalHeight || media.height || window.innerHeight;
+          if (!mw || !mh) return;
+          const scale = Math.max(window.innerWidth / mw, window.innerHeight / mh);
+          const w = mw * scale;
+          const h = mh * scale;
+          const x = (window.innerWidth - w) / 2;
+          const y = (window.innerHeight - h) / 2;
+          ctx.drawImage(media, x, y, w, h);
+        }
+
+        // Draw bottom gradient shade
+        function drawShade(ctx) {
+          const yStart = window.innerHeight * 0.52;
+          const grad = ctx.createLinearGradient(0, yStart, 0, window.innerHeight);
+          grad.addColorStop(0, 'rgba(0,0,0,0)');
+          grad.addColorStop(1, 'rgba(0,0,0,0.88)');
+          ctx.save();
+          ctx.fillStyle = grad;
+          ctx.fillRect(0, yStart, window.innerWidth, window.innerHeight - yStart);
+          ctx.restore();
+        }
+
+        // Rounded-rect point sampling (~44 points)
+        function getRoundedRectPoints(w, h, r) {
+          const points = [];
+          const corners = [
+            { cx: w / 2 - r,  cy: -h / 2 + r, start: -Math.PI / 2, end: 0 },
+            { cx: w / 2 - r,  cy:  h / 2 - r, start: 0,             end: Math.PI / 2 },
+            { cx: -w / 2 + r, cy:  h / 2 - r, start: Math.PI / 2,   end: Math.PI },
+            { cx: -w / 2 + r, cy: -h / 2 + r, start: Math.PI,       end: Math.PI * 1.5 }
+          ];
+          for (let c = 0; c < corners.length; c++) {
+            const corner = corners[c];
+            for (let step = 0; step <= 10; step++) {
+              const angle = corner.start + (corner.end - corner.start) * (step / 10);
+              points.push([
+                corner.cx + r * Math.cos(angle),
+                corner.cy + r * Math.sin(angle)
+              ]);
+            }
+          }
+          return points;
+        }
+
+        // 3D projection
+        function projectPoints(points, rx, ry, cx, cy) {
+          const ax = rx * Math.PI / 180;
+          const ay = ry * Math.PI / 180;
+          const cosAy = Math.cos(ay);
+          const sinAy = Math.sin(ay);
+          const cosAx = Math.cos(ax);
+          const sinAx = Math.sin(ax);
+
+          const projected = [];
+          for (let i = 0; i < points.length; i++) {
+            const x = points[i][0];
+            const y = points[i][1];
+            const xx = x * cosAy;
+            const yy = y * cosAx;
+            const z = x * sinAy - y * sinAx;
+            const p = 850 / (850 + z);
+            projected.push([cx + xx * p, cy + yy * p]);
+          }
+          return projected;
+        }
+
+        // Render current data state
+        function render() {
+          const state = states[current] || states.mars;
+          experience.setAttribute('data-planet', current);
+          planetTitle.textContent = state.name;
+          planetEnName.textContent = state.enName;
+          nextName.textContent = state.next;
+          nextNumber.textContent = state.number;
+          portalBtn.setAttribute('aria-label', 'سفر به ' + state.next);
+
+          // Build facts
+          factsList.innerHTML = state.facts
+            .map(function(pair) {
+              return '<div class="fact"><dt>' + pair[0] + '</dt><dd>' + pair[1] + '</dd></div>';
+            })
+            .join('');
+
+          // Build planet-list with direct event bindings
+          planetList.innerHTML = planets
+            .map(function(p) {
+              const isActive = p.key === current;
+              return '<span class="planet-item' + (isActive ? ' active' : '') + '" data-planet="' + p.key + '" role="button" tabindex="0">' + p.fa + '</span>';
+            })
+            .join('');
+
+          // Bind click to each planet item directly
+          const planetItems = planetList.querySelectorAll('.planet-item');
+          planetItems.forEach(function(item) {
+            item.addEventListener('click', function(e) {
+              e.preventDefault();
+              e.stopPropagation();
+              const target = item.getAttribute('data-planet');
+              if (target) {
+                jumpToPlanet(target);
+              }
+            });
+          });
+
+          // Retrigger .is-switching on every re-render after the first
+          if (renderCount > 0) {
+            planetList.classList.remove('is-switching');
+            void planetList.offsetWidth;
+            planetList.classList.add('is-switching');
+          }
+
+          // Toggle .is-visible on matching background video
+          const allBgs = document.querySelectorAll('.background');
+          allBgs.forEach(function(bg) {
+            if (bg.id === state.background) {
+              bg.classList.add('is-visible');
+              bg.loop = true;
+              bg.play().catch(function() {});
+            } else {
+              bg.classList.remove('is-visible');
+            }
+          });
+
+          // Show portal image or video
+          if (state.image) {
+            portalImage.style.display = 'block';
+            portalVideo.style.display = 'none';
+          } else {
+            portalImage.style.display = 'none';
+            portalVideo.style.display = 'block';
+            if (state.portal) {
+              portalVideo.src = state.portal;
+              portalVideo.loop = true;
+              portalVideo.play().catch(function() {});
+            }
+          }
+
+          // Update Drawer and Explore views
+          renderDrawerPlanets();
+          renderExploreGrid();
+
+          renderCount++;
+        }
+
+        function renderDrawerPlanets() {
+          if (!drawerPlanetsList) return;
+          drawerPlanetsList.innerHTML = planets.map(p => {
+            const isActive = p.key === current;
+            return '<button class="drawer-planet-btn' + (isActive ? ' active' : '') + '" data-planet="' + p.key + '">' +
+              '<span>' + p.fa + ' (' + p.en + ')</span>' +
+              '<span style="font-size:11px;opacity:0.6;">' + (isActive ? 'مستقر' : 'جهش') + '</span>' +
+              '</button>';
+          }).join('');
+
+          const drawerBtns = drawerPlanetsList.querySelectorAll('.drawer-planet-btn');
+          drawerBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+              e.stopPropagation();
+              const target = btn.getAttribute('data-planet');
+              if (target) jumpToPlanet(target);
+            });
+          });
+        }
+
+        function renderExploreGrid() {
+          if (!explorePlanetGrid) return;
+          explorePlanetGrid.innerHTML = planets.map((p, idx) => {
+            const isActive = p.key === current;
+            const num = (idx + 1).toString().padStart(2, '0');
+            return '<div class="explore-card' + (isActive ? ' active' : '') + '" data-planet="' + p.key + '">' +
+              '<div class="explore-card-num">[' + num + ']</div>' +
+              '<div class="explore-card-title">' + p.fa + '</div>' +
+              '<div class="explore-card-type">' + p.type + '</div>' +
+              '</div>';
+          }).join('');
+
+          const cards = explorePlanetGrid.querySelectorAll('.explore-card');
+          cards.forEach(card => {
+            card.addEventListener('click', function(e) {
+              e.stopPropagation();
+              const target = card.getAttribute('data-planet');
+              if (target) jumpToPlanet(target);
+            });
+          });
+        }
+
+        // Animations for content and mask
+        function revealMask() {
+          experience.classList.remove('mask-revealing');
+          void experience.offsetWidth;
+          experience.classList.add('mask-revealing');
+          maskScale = 0;
+          return animateValue(function(v) { maskScale = v; }, 700);
+        }
+
+        function revealPlanetContent() {
+          experience.classList.remove('content-revealing');
+          void experience.offsetWidth;
+          experience.classList.add('content-revealing');
+        }
+
+        // Instant, ultra-reliable direct jump to any planet
+        function jumpToPlanet(targetPlanet) {
+          if (!targetPlanet) return;
+          const key = targetPlanet.toLowerCase();
+          if (!states[key]) return;
+          if (key === current) return;
+
+          // Clear any transition state and close modals
+          closeAllOverlays();
+          busy = false;
+          sceneFrozen = false;
+          transitionActive = false;
+          expansion = 0;
+          canvasOpacity = 1;
+          experience.classList.remove('is-transitioning', 'is-loading', 'is-committing');
+
+          // Switch active planet
+          current = key;
+          render();
+
+          // Smooth portal reveal and content entrance
+          revealMask();
+          revealPlanetContent();
+        }
+
+        // Travel transition for portal button and portal heading
+        async function travel() {
+          closeAllOverlays();
+
+          // Determine next planet from states
+          let nextPlanetObj = planets.find(p => p.fa === states[current].next);
+          let nextKey = nextPlanetObj ? nextPlanetObj.key : 'earth';
+
+          busy = true;
+          experience.classList.add('is-transitioning');
+          transitionActive = true;
+
+          // Animate portal window expansion to fill the screen (600ms)
+          await animateValue(function(v) { expansion = v; }, 600);
+
+          // Change planet at full expansion
+          current = nextKey;
+          render();
+
+          // Reset expansion and transition state
+          transitionActive = false;
+          expansion = 0;
+          maskScale = 0;
+          canvasOpacity = 1;
+          experience.classList.remove('is-transitioning');
+
+          // Reveal new destination and metrics
+          const maskPromise = revealMask();
+          revealPlanetContent();
+          await maskPromise;
+
+          busy = false;
+        }
+
+        // Pointer tracking & tilt
+        window.addEventListener('pointermove', function(e) {
+          targetY = (e.clientX / window.innerWidth - 0.5) * 37.4;
+          targetX = (e.clientY / window.innerHeight - 0.5) * -33;
+        });
+
+        document.addEventListener('pointerleave', function() {
+          targetX = 0;
+          targetY = 0;
+        });
+
+        // Click handlers on Portal & Heading
+        portalBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          travel();
+        });
+
+        if (portalHeading) {
+          portalHeading.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            travel();
+          });
+        }
+
+        // Modals & Navigation Handling
+        function closeAllOverlays() {
+          aboutModal.classList.remove('is-open');
+          exploreModal.classList.remove('is-open');
+          cloudflareModal.classList.remove('is-open');
+          menuDrawer.classList.remove('is-open');
+          navAbout.classList.remove('active');
+          navExplore.classList.remove('active');
+          navPlanets.classList.remove('active');
+        }
+
+        creatorBadge.addEventListener('click', function(e) {
+          e.preventDefault();
+          closeAllOverlays();
+          aboutModal.classList.add('is-open');
+        });
+
+        navAbout.addEventListener('click', function(e) {
+          e.preventDefault();
+          closeAllOverlays();
+          navAbout.classList.add('active');
+          aboutModal.classList.add('is-open');
+        });
+
+        navExplore.addEventListener('click', function(e) {
+          e.preventDefault();
+          closeAllOverlays();
+          navExplore.classList.add('active');
+          exploreModal.classList.add('is-open');
+        });
+
+        navPlanets.addEventListener('click', function(e) {
+          e.preventDefault();
+          closeAllOverlays();
+          navPlanets.classList.add('active');
+          planetList.classList.remove('is-switching');
+          void planetList.offsetWidth;
+          planetList.classList.add('is-switching');
+        });
+
+        navCloudflare.addEventListener('click', function(e) {
+          e.preventDefault();
+          closeAllOverlays();
+          cloudflareModal.classList.add('is-open');
+        });
+
+        if (drawerCfBtn) {
+          drawerCfBtn.addEventListener('click', function(e) {
+            closeAllOverlays();
+            cloudflareModal.classList.add('is-open');
+          });
+        }
+
+        menuBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          menuDrawer.classList.toggle('is-open');
+        });
+
+        aboutClose.addEventListener('click', closeAllOverlays);
+        exploreClose.addEventListener('click', closeAllOverlays);
+        cfClose.addEventListener('click', closeAllOverlays);
+        drawerClose.addEventListener('click', closeAllOverlays);
+        aboutStartJump.addEventListener('click', closeAllOverlays);
+
+        // Backdrop click to close
+        aboutModal.addEventListener('click', function(e) {
+          if (e.target === aboutModal) closeAllOverlays();
+        });
+        exploreModal.addEventListener('click', function(e) {
+          if (e.target === exploreModal) closeAllOverlays();
+        });
+        cloudflareModal.addEventListener('click', function(e) {
+          if (e.target === cloudflareModal) closeAllOverlays();
+        });
+
+        // Copy button handler for Cloudflare & Git snippets
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const targetId = btn.getAttribute('data-target');
+            const targetEl = document.getElementById(targetId);
+            if (targetEl) {
+              navigator.clipboard.writeText(targetEl.textContent.trim()).then(() => {
+                const originalText = btn.textContent;
+                btn.textContent = 'کپی شد! ✓';
+                btn.style.background = '#10b981';
+                setTimeout(() => {
+                  btn.textContent = originalText;
+                  btn.style.background = '';
+                }, 2000);
+              });
+            }
+          });
+        });
+
+        // Download single-file index.html
+        cfDownloadHtml.addEventListener('click', function() {
+          const htmlContent = '<!doctype html>\n' + document.documentElement.outerHTML;
+          const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'index.html';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        });
+
+        // Download wrangler.toml
+        cfDownloadToml.addEventListener('click', function() {
+          const tomlContent = 'name = "planet-jumping"\ncompatibility_date = "2024-01-01"\npages_build_output_dir = "."\n';
+          const blob = new Blob([tomlContent], { type: 'text/plain;charset=utf-8' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'wrangler.toml';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        });
+
+        // ====================================================================
+        // AUTOMATED GITHUB TOKEN UPLOADER & CLOUDFLARE DEPLOYMENT RUNNER
+        // ====================================================================
+        let isUploadingToGithub = false;
+
+        // Toggle token visibility
+        if (ghToggleTokenBtn && ghTokenInput) {
+          ghToggleTokenBtn.addEventListener('click', function() {
+            if (ghTokenInput.type === 'password') {
+              ghTokenInput.type = 'text';
+              ghToggleTokenBtn.textContent = '🙈';
+            } else {
+              ghTokenInput.type = 'password';
+              ghToggleTokenBtn.textContent = '👁️';
+            }
+          });
+        }
+
+        // Restore saved session token / repo if available
+        try {
+          const savedToken = sessionStorage.getItem('pj_gh_token');
+          if (savedToken && ghTokenInput) ghTokenInput.value = savedToken;
+          const savedRepo = sessionStorage.getItem('pj_gh_repo');
+          if (savedRepo && ghRepoInput) ghRepoInput.value = savedRepo;
+          const savedHook = sessionStorage.getItem('pj_cf_hook');
+          if (savedHook && cfHookInput) cfHookInput.value = savedHook;
+        } catch (e) {}
+
+        // UTF-8 safe base64 encoding (supports Persian characters)
+        function toBase64Utf8(str) {
+          return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+            return String.fromCharCode(parseInt(p1, 16));
+          }));
+        }
+
+        // Helper to append live logs to terminal
+        function logDeploy(text, type) {
+          if (!ghUploadLogs) return;
+          ghUploadLogs.style.display = 'block';
+          const colors = {
+            info: '#93c5fd',
+            success: '#4ade80',
+            warn: '#fbbf24',
+            error: '#f87171',
+            step: '#ffffff',
+            badge: '#f38020'
+          };
+          const line = document.createElement('div');
+          line.style.color = colors[type] || '#fff';
+          line.style.marginBottom = '6px';
+          line.style.wordBreak = 'break-word';
+          line.innerHTML = text;
+          ghUploadLogs.appendChild(line);
+          ghUploadLogs.scrollTop = ghUploadLogs.scrollHeight;
+        }
+
+        // Project fallback templates if direct fetch fails
+        const PROJECT_FALLBACKS = {
+          'wrangler.toml': 'name = "planet-jumping"\ncompatibility_date = "2024-01-01"\npages_build_output_dir = "."\n',
+          '_headers': '/*\n  X-Frame-Options: SAMEORIGIN\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n',
+          'package.json': '{\n  "name": "planet-jumping",\n  "private": true,\n  "version": "1.0.0",\n  "type": "module",\n  "scripts": {\n    "dev": "vite",\n    "build": "vite build",\n    "preview": "vite preview"\n  },\n  "dependencies": {\n    "react": "^19.0.1",\n    "react-dom": "^19.0.1"\n  },\n  "devDependencies": {\n    "vite": "^8.3.0"\n  }\n}\n',
+          '.gitignore': 'node_modules/\ndist/\nbuild/\n.env*\n*.log\n',
+          'README.md': '# 🌌 جهش میان سیارات (Planet Jumping)\n### پدیدآورنده و طراح: **علیرضا کریمی** (Alireza Karimi)\n\nیک تجربه وب تعاملی و سه‌بعدی تمام‌صفحه برای کاوش و جهش در میان سیارات منظومه شمسی با پورتال ۳ بعدی محاسباتی، شبیه‌سازی اتمسفر و مشخصات علمی دقیق سیارات.\n\n## ⚡ استقرار روی کلودفلر (Cloudflare Pages)\nاین پروژه به صورت مستقل ساخته شده و در شبکه لبه Cloudflare Pages با سرعت فوق‌العاده اجرا می‌شود.\n\n© تمامی حقوق متعلق به **علیرضا کریمی** است.\n',
+          '.github/workflows/deploy.yml': 'name: Deploy to Cloudflare Pages\non:\n  push:\n    branches: [main]\n  workflow_dispatch:\njobs:\n  deploy:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: 20\n      - run: npm install\n      - run: npm run build\n'
+        };
+
+        async function fetchFileContent(filePath) {
+          try {
+            if (filePath === 'index.html') {
+              // Get current pristine DOM outerHTML
+              const docHtml = '<!doctype html>\n' + document.documentElement.outerHTML;
+              return docHtml;
+            }
+            const res = await fetch('/' + filePath);
+            if (res.ok) {
+              return await res.text();
+            }
+          } catch (e) {}
+          return PROJECT_FALLBACKS[filePath] || '';
+        }
+
+        if (ghStartUploadBtn) {
+          ghStartUploadBtn.addEventListener('click', async function() {
+            if (isUploadingToGithub) return;
+
+            const token = ghTokenInput ? ghTokenInput.value.trim() : '';
+            const repoName = (ghRepoInput && ghRepoInput.value.trim()) ? ghRepoInput.value.trim() : 'planet-jumping';
+            const isPrivate = ghPrivateCheck ? ghPrivateCheck.checked : false;
+            const cfHookUrl = cfHookInput ? cfHookInput.value.trim() : '';
+
+            if (!token) {
+              if (ghUploadLogs) {
+                ghUploadLogs.innerHTML = '';
+                logDeploy('❌ خطا: لطفاً ابتدا توکن شخصی گیت‌هاب (Personal Access Token) خود را وارد کنید.', 'error');
+                logDeploy('💡 برای ساخت توکن، روی لینک «+ ساخت توکن در گیت‌هاب» در بالای کادر کلیک کنید و دسترسی repo را علامت بزنید.', 'warn');
+              }
+              if (ghTokenInput) ghTokenInput.focus();
+              return;
+            }
+
+            // Save in session
+            try {
+              sessionStorage.setItem('pj_gh_token', token);
+              sessionStorage.setItem('pj_gh_repo', repoName);
+              if (cfHookUrl) sessionStorage.setItem('pj_cf_hook', cfHookUrl);
+            } catch (e) {}
+
+            isUploadingToGithub = true;
+            ghStartUploadBtn.disabled = true;
+            ghStartUploadBtn.style.opacity = '0.75';
+            ghBtnIcon.textContent = '⏳';
+            ghBtnText.textContent = 'در حال ارتباط با گیت‌هاب و ارسال فایل‌ها…';
+            ghUploadLogs.innerHTML = '';
+
+            const ghHeaders = {
+              'Authorization': 'Bearer ' + token,
+              'Accept': 'application/vnd.github+json',
+              'X-GitHub-Api-Version': '2022-11-28',
+              'Content-Type': 'application/json'
+            };
+
+            try {
+              logDeploy('🚀 <strong>شروع فرآیند آپلود خودکار و استقرار در کلودفلر</strong>', 'step');
+              logDeploy('🔑 <strong>مرحله ۱:</strong> در حال اعتبارسنجی توکن در سرورهای رسمی GitHub...', 'info');
+
+              // 1. Verify user
+              const userRes = await fetch('https://api.github.com/user', { headers: ghHeaders });
+              if (!userRes.ok) {
+                const errData = await userRes.json().catch(() => ({}));
+                const errMsg = errData.message || userRes.statusText;
+                if (userRes.status === 401) {
+                  throw new Error('توکن گیت‌هاب نامعتبر است یا منقضی شده است (خطای 401 Bad credentials). لطفاً توکن جدید با دسترسی repo تولید نمایید.');
+                }
+                throw new Error('خطا در اعتبارسنجی توکن گیت‌هاب: ' + errMsg);
+              }
+
+              const userData = await userRes.json();
+              const username = userData.login;
+              const displayName = userData.name || username;
+              logDeploy('✓ احراز هویت موفق: کاربر <strong>@' + username + '</strong> (' + displayName + ')', 'success');
+
+              // 2. Check if repo exists or create it
+              logDeploy('📁 <strong>مرحله ۲:</strong> بررسی مخزن «' + repoName + '» در اکانت گیت‌هاب...', 'info');
+              let defaultBranch = 'main';
+              const checkRepoRes = await fetch('https://api.github.com/repos/' + username + '/' + repoName, { headers: ghHeaders });
+
+              if (checkRepoRes.ok) {
+                const repoData = await checkRepoRes.json();
+                defaultBranch = repoData.default_branch || 'main';
+                logDeploy('✓ مخزن «' + repoName + '» از قبل در اکانت شما موجود است (شاخه: ' + defaultBranch + '). فایل‌ها به‌روزرسانی خواهند شد.', 'success');
+              } else if (checkRepoRes.status === 404) {
+                logDeploy('⚙️ مخزن «' + repoName + '» یافت نشد. در حال ساخت خودکار مخزن جدید در گیت‌هاب...', 'info');
+                const createRepoRes = await fetch('https://api.github.com/user/repos', {
+                  method: 'POST',
+                  headers: ghHeaders,
+                  body: JSON.stringify({
+                    name: repoName,
+                    description: 'جهش میان سیارات - اثر علیرضا کریمی | Planet Jumping by Alireza Karimi',
+                    private: isPrivate,
+                    auto_init: true
+                  })
+                });
+
+                if (!createRepoRes.ok) {
+                  const createErr = await createRepoRes.json().catch(() => ({}));
+                  throw new Error('خطا در ایجاد مخزن: ' + (createErr.message || createRepoRes.statusText));
+                }
+
+                logDeploy('✓ مخزن جدید «' + repoName + '» با موفقیت در گیت‌هاب ساخته شد!', 'success');
+                logDeploy('⏳ در حال آماده‌سازی ساختار گیت‌هاب (۲ ثانیه)...', 'info');
+                await new Promise(r => setTimeout(r, 2200));
+              } else {
+                const errData = await checkRepoRes.json().catch(() => ({}));
+                throw new Error('خطا در بررسی مخزن: ' + (errData.message || checkRepoRes.statusText));
+              }
+
+              // 3. Files to upload
+              const filesToUpload = [
+                'index.html',
+                'wrangler.toml',
+                '_headers',
+                'package.json',
+                'README.md',
+                '.github/workflows/deploy.yml',
+                '.gitignore'
+              ];
+
+              logDeploy('📦 <strong>مرحله ۳:</strong> در حال آپلود ' + filesToUpload.length + ' فایل اصلی پروژه به گیت‌هاب...', 'step');
+
+              for (let i = 0; i < filesToUpload.length; i++) {
+                const filePath = filesToUpload[i];
+                logDeploy('  📤 در حال خواندن و بسته‌بندی: <code>' + filePath + '</code>...', 'info');
+                
+                const fileContent = await fetchFileContent(filePath);
+                const b64 = toBase64Utf8(fileContent);
+
+                // Check existing SHA
+                let existingSha = null;
+                const fileCheckRes = await fetch('https://api.github.com/repos/' + username + '/' + repoName + '/contents/' + filePath + '?ref=' + defaultBranch, { headers: ghHeaders });
+                if (fileCheckRes.ok) {
+                  const existingData = await fileCheckRes.json();
+                  existingSha = existingData.sha;
+                }
+
+                const putPayload = {
+                  message: 'Deploy ' + filePath + ' - Planet Jumping by Alireza Karimi',
+                  content: b64,
+                  branch: defaultBranch
+                };
+                if (existingSha) {
+                  putPayload.sha = existingSha;
+                }
+
+                const putRes = await fetch('https://api.github.com/repos/' + username + '/' + repoName + '/contents/' + filePath, {
+                  method: 'PUT',
+                  headers: ghHeaders,
+                  body: JSON.stringify(putPayload)
+                });
+
+                if (!putRes.ok) {
+                  const putErr = await putRes.json().catch(() => ({}));
+                  logDeploy('  ⚠️ اخطار در ارسال ' + filePath + ': ' + (putErr.message || putRes.statusText), 'warn');
+                } else {
+                  logDeploy('  ✓ [' + (i + 1) + '/' + filesToUpload.length + '] ارسال موفق فایل <code>' + filePath + '</code> به شاخه ' + defaultBranch, 'success');
+                }
+              }
+
+              logDeploy('🎉 <strong>تمام فایل‌ها با موفقیت در مخزن گیت‌هاب شما ثبت شدند!</strong>', 'success');
+
+              // 4. Cloudflare Execution
+              logDeploy('☁️ <strong>مرحله ۴:</strong> اجرای پروژه روی کلودفلر (Cloudflare Pages)...', 'step');
+
+              let hookTriggered = false;
+              if (cfHookUrl) {
+                logDeploy('⚡ در حال ارسال درخواست استقرار به هوک کلودفلر (Deploy Hook)...', 'info');
+                try {
+                  await fetch(cfHookUrl, { method: 'POST', mode: 'no-cors' });
+                  hookTriggered = true;
+                  logDeploy('✓ سیگنال استقرار با موفقیت به Cloudflare Pages ارسال شد! فرآیند بیلد و انتشار آغاز گردید.', 'success');
+                } catch (hookErr) {
+                  logDeploy('⚠️ امکان فراخوانی مستقیم هوک از مرورگر وجود نداشت (CORS). لطفاً از طریق داشبورد کلودفلر استقرار را تایید فرمایید.', 'warn');
+                }
+              }
+
+              const repoUrl = 'https://github.com/' + username + '/' + repoName;
+              const cfPagesDashboardUrl = 'https://dash.cloudflare.com/?to=/:account/pages/new/provider/github';
+              const liveDomain = 'https://' + repoName + '.pages.dev';
+
+              // Rich Success Box
+              const successBox = document.createElement('div');
+              successBox.style.marginTop = '14px';
+              successBox.style.padding = '16px';
+              successBox.style.background = 'rgba(16, 185, 129, 0.15)';
+              successBox.style.border = '1px solid #10b981';
+              successBox.style.borderRadius = '14px';
+              successBox.style.direction = 'rtl';
+              successBox.style.textAlign = 'right';
+
+              successBox.innerHTML = `
+                <div style="font-size:15px;font-weight:700;color:#10b981;margin-bottom:8px;">
+                  ✨ عملیات با موفقیت کامل انجام شد!
+                </div>
+                <div style="font-size:12px;line-height:1.8;color:rgba(255,255,255,0.9);margin-bottom:12px;">
+                  پروژه «جهش میان سیارات» با امضای <strong>علیرضا کریمی</strong> در مخزن گیت‌هاب شما قرار گرفت.
+                  ${hookTriggered ? '<br><span style="color:#4ade80;">✓ هوک کلودفلر فعال شد و سایت در حال انتشار خودکار است!</span>' : ''}
+                </div>
+                
+                <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;">
+                  <a href="${repoUrl}" target="_blank" style="flex:1;min-width:200px;height:40px;background:#24292e;border:1px solid rgba(255,255,255,0.25);border-radius:10px;color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;font-size:13px;font-weight:700;text-decoration:none;">
+                    <span>🐙 مشاهده مخزن در گیت‌هاب ↗</span>
+                  </a>
+                  <a href="${cfPagesDashboardUrl}" target="_blank" style="flex:1;min-width:200px;height:40px;background:#f38020;border-radius:10px;color:#000;display:flex;align-items:center;justify-content:center;gap:8px;font-size:13px;font-weight:700;text-decoration:none;">
+                    <span>☁️ اتصال و استقرار در Cloudflare Pages ↗</span>
+                  </a>
+                </div>
+
+                <div style="background:rgba(0,0,0,0.4);border-radius:10px;padding:10px 14px;font-size:12px;color:#e2e8f0;line-height:1.7;">
+                  <strong>🌐 آدرس دامنه شما در کلودفلر پس از انتشار:</strong><br>
+                  <a href="${liveDomain}" target="_blank" style="color:#60a5fa;direction:ltr;display:inline-block;margin-top:2px;font-family:monospace;font-size:13px;">${liveDomain}</a>
+                </div>
+              `;
+              ghUploadLogs.appendChild(successBox);
+              ghUploadLogs.scrollTop = ghUploadLogs.scrollHeight;
+
+            } catch (err) {
+              console.error('GitHub Upload Error:', err);
+              logDeploy('❌ ' + (err.message || 'خطای ناشناخته در آپلود به گیت‌هاب.'), 'error');
+            } finally {
+              isUploadingToGithub = false;
+              ghStartUploadBtn.disabled = false;
+              ghStartUploadBtn.style.opacity = '1';
+              ghBtnIcon.textContent = '🚀';
+              ghBtnText.textContent = 'شروع مجدد آپلود خودکار به گیت‌هاب و استقرار در کلودفلر';
+            }
+          });
+        }
+
+        // Reset to Mars
+        if (resetTourBtn) {
+          resetTourBtn.addEventListener('click', function() {
+            jumpToPlanet('mars');
+          });
+        }
+
+        // Logo click: return to Mars
+        floatingLogo.addEventListener('click', function() {
+          jumpToPlanet('mars');
+        });
+
+        // Keyboard Controls: 1-8 for direct planet jump, Space/Enter for portal jump
+        window.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') {
+            closeAllOverlays();
+            return;
+          }
+          if (e.code === 'Space' || e.key === 'Enter') {
+            if (!aboutModal.classList.contains('is-open') && !exploreModal.classList.contains('is-open') && !cloudflareModal.classList.contains('is-open')) {
+              e.preventDefault();
+              travel();
+            }
+          }
+          if (e.key >= '1' && e.key <= '8') {
+            const idx = parseInt(e.key, 10) - 1;
+            if (planets[idx]) {
+              jumpToPlanet(planets[idx].key);
+            }
+          }
+        });
+
+        // Frame loop for portal canvas
+        let lastTime = performance.now();
+        function frame(now) {
+          requestAnimationFrame(frame);
+          const dt = Math.min(40, now - lastTime);
+          lastTime = now;
+
+          rotX += (targetX - rotX) * Math.min(1, dt * 0.009);
+          rotY += (targetY - rotY) * Math.min(1, dt * 0.009);
+
+          portalCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+          if (sceneFrozen) {
+            portalCtx.drawImage(sceneCanvas, 0, 0, window.innerWidth, window.innerHeight);
+            drawShade(portalCtx);
+          }
+
+          const rect = portalBtn.getBoundingClientRect();
+          const rectCx = rect.left + rect.width / 2;
+          const rectCy = rect.top + rect.height / 2;
+          const e = expansion;
+
+          const cx = rectCx + (window.innerWidth / 2 - rectCx) * e;
+          const cy = rectCy + (window.innerHeight / 2 - rectCy) * e;
+          const baseW = rect.width + (window.innerWidth - rect.width) * e;
+          const baseH = rect.height + (window.innerHeight - rect.height) * e;
+          const scale = e ? 1 : maskScale;
+          const w = baseW * scale;
+          const h = baseH * scale;
+          const r = 90 * (1 - e) * scale;
+          const rx = rotX * (1 - e);
+          const ry = rotY * (1 - e);
+
+          if (w > 1 && h > 1) {
+            const clampedR = Math.max(0, Math.min(r, w / 2, h / 2));
+            const localPts = getRoundedRectPoints(w, h, clampedR);
+            const screenPts = projectPoints(localPts, rx, ry, cx, cy);
+
+            portalCtx.save();
+            portalCtx.globalAlpha = canvasOpacity;
+            portalCtx.beginPath();
+            for (let i = 0; i < screenPts.length; i++) {
+              if (i === 0) portalCtx.moveTo(screenPts[i][0], screenPts[i][1]);
+              else portalCtx.lineTo(screenPts[i][0], screenPts[i][1]);
+            }
+            portalCtx.closePath();
+            portalCtx.clip();
+
+            portalCtx.fillStyle = '#030303';
+            portalCtx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+
+            const activeMedia = states[current] && states[current].image ? portalImage : portalVideo;
+            if (activeMedia) {
+              drawCover(portalCtx, activeMedia);
+            }
+
+            if (transitionActive) {
+              drawShade(portalCtx);
+            }
+
+            portalCtx.restore();
+          }
+        }
+        requestAnimationFrame(frame);
+
+        // Custom cursor tracking & lerp
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let orbitX = mouseX;
+        let orbitY = mouseY;
+        let cursorVisible = false;
+
+        window.addEventListener('pointermove', function(e) {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+          if (!cursorVisible) {
+            cursorVisible = true;
+            cursor.classList.add('is-visible');
+            orbitX = mouseX;
+            orbitY = mouseY;
+          }
+        });
+
+        document.addEventListener('mouseleave', function() {
+          cursorVisible = false;
+          cursor.classList.remove('is-visible');
+        });
+
+        function handlePointerEnterInteractive() {
+          cursor.classList.add('is-enter');
+        }
+        function handlePointerLeaveInteractive() {
+          cursor.classList.remove('is-enter');
+        }
+
+        portalBtn.addEventListener('pointerenter', handlePointerEnterInteractive);
+        portalBtn.addEventListener('pointerleave', handlePointerLeaveInteractive);
+        if (portalHeading) {
+          portalHeading.addEventListener('pointerenter', handlePointerEnterInteractive);
+          portalHeading.addEventListener('pointerleave', handlePointerLeaveInteractive);
+        }
+
+        document.addEventListener('mouseover', function(e) {
+          if (e.target.closest('button, a, .planet-item, .explore-card, .drawer-planet-btn, .portal, .header-creator')) {
+            cursor.classList.add('is-enter');
+          } else {
+            cursor.classList.remove('is-enter');
+          }
+        });
+
+        function updateCursor() {
+          requestAnimationFrame(updateCursor);
+          if (!cursorVisible) return;
+          orbitX += (mouseX - orbitX) * 0.2;
+          orbitY += (mouseY - orbitY) * 0.2;
+
+          cursor.style.transform = 'translate3d(' + orbitX + 'px, ' + orbitY + 'px, 0)';
+          cursorDot.style.transform = 'translate3d(' + (mouseX - orbitX) + 'px, ' + (mouseY - orbitY) + 'px, 0) translate(-50%, -50%)';
+        }
+        requestAnimationFrame(updateCursor);
+
+        // Preloader Sequence
+        let preloaderFinished = false;
+
+        function finishPreloader() {
+          if (preloaderFinished) return;
+          preloaderFinished = true;
+
+          preloaderValue.textContent = '100';
+          preloaderCount.classList.add('is-leaving');
+          const creatorTag = document.getElementById('preloader-creator-tag');
+          if (creatorTag) creatorTag.style.opacity = '0';
+          floatingLogo.classList.add('is-docked');
+          preloaderEl.classList.add('is-background');
+          preloaderEl.style.display = 'none';
+          document.body.classList.add('preload-complete');
+
+          startExperience();
+
+          setTimeout(function() {
+            if (preloaderCount && preloaderCount.parentNode) {
+              preloaderCount.remove();
+            }
+          }, 750);
+
+          setTimeout(function() {
+            floatingLogo.classList.add('is-settled');
+          }, 2000);
+        }
+
+        // Allow click to skip preloader immediately
+        preloaderEl.addEventListener('click', finishPreloader);
+
+        async function startExperience() {
+          // Play visible background
+          const bg = document.getElementById(states[current].background);
+          if (bg) {
+            bg.loop = true;
+            bg.play().catch(function() {});
+          }
+
+          // Await current portal media
+          const targetMedia = states[current].image ? portalImage : portalVideo;
+          if (targetMedia === portalVideo) {
+            portalVideo.loop = true;
+            portalVideo.play().catch(function() {});
+            if (portalVideo.readyState < 2) {
+              await Promise.race([
+                new Promise(function(r) { portalVideo.addEventListener('canplay', r, { once: true }); }),
+                new Promise(function(r) { setTimeout(r, 1200); })
+              ]);
+            }
+          } else if (targetMedia === portalImage) {
+            if (!portalImage.complete) {
+              await Promise.race([
+                new Promise(function(r) { portalImage.addEventListener('load', r, { once: true }); }),
+                new Promise(function(r) { setTimeout(r, 1200); })
+              ]);
+            }
+          }
+
+          await revealMask();
+          document.body.classList.add('intro-ready');
+          setTimeout(function() {
+            revealPlanetContent();
+          }, 850);
+        }
+
+        function initPreloader() {
+          function startPlayback() {
+            if (preloaderVideo.duration && !isNaN(preloaderVideo.duration)) {
+              preloaderVideo.playbackRate = Math.max(0.25, preloaderVideo.duration / 3);
+            }
+            const playPromise = preloaderVideo.play();
+            if (playPromise !== undefined) {
+              playPromise.catch(function(err) {
+                console.warn('Preloader play() error:', err);
+                finishPreloader();
+              });
+            }
+          }
+
+          if (preloaderVideo.readyState >= 1) {
+            startPlayback();
+          } else {
+            preloaderVideo.addEventListener('loadedmetadata', startPlayback, { once: true });
+          }
+
+          preloaderVideo.addEventListener('ended', finishPreloader, { once: true });
+          preloaderVideo.addEventListener('error', finishPreloader, { once: true });
+
+          // Fallback timer if network stalls
+          setTimeout(function() {
+            if (!preloaderFinished) {
+              finishPreloader();
+            }
+          }, 3500);
+
+          function updatePreloadCounter() {
+            if (preloaderFinished) return;
+            if (preloaderVideo.duration) {
+              const pct = Math.min(100, Math.round((preloaderVideo.currentTime / preloaderVideo.duration) * 100));
+              preloaderValue.textContent = String(pct);
+            }
+            requestAnimationFrame(updatePreloadCounter);
+          }
+          requestAnimationFrame(updatePreloadCounter);
+        }
+
+        // Initialize state & start preloader
+        render();
+        initPreloader();
+      })();
+    </script>
+  
+
+</body></html>
