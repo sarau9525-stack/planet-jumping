@@ -16,18 +16,26 @@
 
 ## ⚡ استقرار روی کلودفلر (Cloudflare Pages)
 
-### روش اول: اتصال مستقیم گیت‌هاب (پیشنهادی)
-1. مخزن را در داشبورد [Cloudflare Pages](https://dash.cloudflare.com/) با گزینه **Connect to Git** انتخاب کنید.
-2. تنظیمات بیلد:
-   - **Framework preset**: `Vite` یا `None`
-   - **Build command**: `npm run build` (یا خالی)
-   - **Build output directory**: `dist` (یا `.`)
-3. دکمه **Save and Deploy** را بزنید.
+### روش اول: استقرار آنی و بدون خطا (پیشنهادی — Zero Build)
+1. در داشبورد [Cloudflare Pages](https://dash.cloudflare.com/) به مسیر **Workers & Pages > Create > Pages > Connect to Git** بروید.
+2. مخزن را انتخاب کرده و تنظیمات زیر را وارد کنید:
+   - **Framework preset**: `None`
+   - **Build command**: (کاملاً خالی بگذارید)
+   - **Build output directory**: `.` (یک نقطه)
+3. دکمه **Save and Deploy** را بزنید. در عرض چند ثانیه سایت شما بدون هیچ مرحله بیلد یا خطای پکیجی آنلاین خواهد شد!
 
-### روش دوم: خط فرمان Cloudflare Wrangler
-```bash
-npx wrangler pages deploy dist --project-name=planet-jumping
-```
+### روش دوم: ساخت با Vite (Build Mode)
+- **Framework preset**: `Vite`
+- **Build command**: `npm run build`
+- **Build output directory**: `dist`
+- در بخش **Environment variables** متغیر `NODE_VERSION` را روی `20` تنظیم کنید.
+
+### 🛠️ رفع ارور در صورت بروز خطا در کلودفلر:
+اگر پروژه شما با ارور مواجه شد، کافیست در پنل کلودفلر وارد تب **Settings > Builds & deployments** شوید:
+1. مقدار **Framework preset** را روی **None** قرار دهید.
+2. مقدار **Build command** را پاک کنید تا خالی شود.
+3. مقدار **Build output directory** را روی `.` قرار دهید.
+4. روی دکمه Save کلیک کرده و از زبانه Deployments گزینه **Retry deployment** را بزنید!
 
 ---
 
